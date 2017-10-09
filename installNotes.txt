@@ -1,0 +1,27 @@
+Installing unity on windows and osx is easy. On linux... ehh....
+
+So I found a nice .deb file from:
+https://blogs.unity3d.com/2015/08/26/unity-comes-to-linux-experimental-build-now-available/
+
+-looks like we're good to do everything EXCEPT test on ios... bummer :-/
+
+**NOTE**
+
+monodevelop was NOT WORKING OUT OF THE BOX so i installed monodevelop-complete with
+	sudo apt-get install mono-complete
+		others were clearly having this bug as well.
+
+there's a non-deb extraction-based installer but that leaves the dependencies up to you and i couldn't stomach it on arch sooo...
+
+Afterwards launc unity.
+
+Make an account.
+
+Create a project and start up the "standard assets project"
+
+Click to create a new project and name it TestProject
+	set as 3D or 2D
+	create the project
+	fantastic
+
+Make sure it opens a very IDE-looking IDE and you're good to go
