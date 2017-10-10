@@ -1,0 +1,41 @@
+C# Variables in Unity 3D
+
+Create a new project in unity. You can do this lesson in any compiler but who cares.
+
+Right click in assets and create a new C# script called "variables"
+
+Remember your scripts need to be dragged onto objects. Let's drag out script onto Main Camera to attach it to the Variable script.
+
+Remember "start" is called when the object is created and the "update" function is called over and over again per the framerate of the game!
+
+To get debug logging, click the console in the section down below and then click "run" to start your game. Your debug trace will show up down here! (nice)
+
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Variables : MonoBehaviour {
+
+	// Use this for initialization
+	void Start () {
+		string name = "Thanos";	//thanos is stored as a string in 'name'
+								//semicolon ends the statement
+		string equippedWeapon = "Infinity Gauntlet";
+		string favoriteFurniture = "throne";
+
+		Debug.Log(equippedWeapon);
+		Debug.Log(name);
+		Debug.Log (favoriteFurniture);
+		Debug.Log (equippedWeapon.ToUpper());
+
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
+}
+
+those Debug.Log's just print stuff to the log. Easy right?
+These are just basic strings. Use "." in monodev to see all the functions a string offers, that's how we found the .ToUpper()   :)
+
+
