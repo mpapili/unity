@@ -1,0 +1,133 @@
+**CONDITIONALS**
+
+This douche has activated the paid version of unity so now he gets the cool dark skin -_- anyways...
+
+Conditionals are like in any language. They make decisions. Let's make a brand new C# script called conditionals.
+
+Open your conditionals.cs in monodev and let's get going to make some decisions in C# !
+
+Throw it on the main camera and look at the console in the bottom section to get that sweet sweet debug trace.
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Conditionals : MonoBehaviour {
+
+	int health = -10;
+	//bools in C# !
+	bool gameOver = false;
+	int lives = 3;
+
+	// Use this for initialization
+	void Start () {
+
+		//Conditional example
+		if (health <= 0 && lives == 0) {
+			gameOver = true;
+		}
+
+		//if+else example:
+		if (gameOver == true) {
+			Debug.Log ("The game is over!");
+		} else {
+			Debug.Log ("You're still alive buddy!");
+		}
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
+}
+
+
+Nice! Great example where we learn booleans, if's, and else's. Also How to have multiple conditions for one conditional with && !!!
+
+Here's a tower-defense game as player1! 
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Conditionals2 : MonoBehaviour {
+
+	// Use this for initialization
+	int towersRemainingP1 = 3;
+	int towersRemainingP2 = 3;
+	bool mainTowerDestroyedP1 = false;
+	bool mainTowerDestroyedP2 = false;
+	float timer = 200;
+
+	void Start () {
+
+		if (mainTowerDestroyedP1 == true) {
+			Debug.Log ("you have lost the game!");
+		}
+
+		else if (timer <= 0) {
+			//intro to the || "or" statement!
+			if (mainTowerDestroyedP1 == true || towersRemainingP1 == 0) {
+				Debug.Log ("You have lost the game!");
+			}
+		}
+
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
+}
+
+
+notice that we learn the "or" statement with || here for C#!
+Here's some enhanced logic for a two-player find-out-who-wins scenario:
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Conditionals2 : MonoBehaviour {
+
+	// Use this for initialization
+	int towersRemainingP1 = 3;
+	int towersRemainingP2 = 3;
+	bool mainTowerDestroyedP1 = false;
+	bool mainTowerDestroyedP2 = false;
+	float timer = 200;
+
+	void Start () {
+		//like in python you can use booleans without " == true" !!
+		if (mainTowerDestroyedP1 || mainTowerDestroyedP2) {
+
+			if (mainTowerDestroyedP1) {
+				Debug.Log ("player 1 lost");
+			} else if (mainTowerDestroyedP2) {
+				Debug.Log ("player 2 lost");
+			} else if (timer <= 0) {
+				Debug.Log ("time is up");
+				if (towersRemainingP1 > towersRemainingP2) {
+					Debug.Log ("player 1 wins");
+				} else if (towersRemainingP2 > towersRemainingP1) {
+					Debug.Log ("player 2 wins");
+				} else {
+					Debug.Log ("the game was a draw");
+				}
+			}
+		}
+
+		//example of binary operators "==", "||", "!=", "&&"
+		//binary operators work on two things, one on the left and one on the right
+		if (true == false || false != true && 1 == 1) {
+			Debug.Log ("your example was a success!");	//this executes
+		}
+	}
+	// Update is called once per frame
+	void Update () {
+		timer -= 20;
+	}
+}
+
+notice the section on binary operators, very useful.
+
