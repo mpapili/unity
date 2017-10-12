@@ -1,0 +1,83 @@
+**ARRAYS AND LOOPS IN C#**
+
+"don't ever copy/paste if you don't have to"
+never repeat yourself in good code, NOT EVEN ONCE.
+
+Here's an example of initializing a reserved-space array AND initializing while declaring:
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class lists : MonoBehaviour {
+
+	string[] playersList = new string[4];
+	//we have the array but we need to initialize it
+	//immediatly reserves 4 slots in memory. uses them whether it's there or not
+
+	string[] players = { "Johnnykill25", "bambambunnerlover", "devslopes", "ponyl0ver" };
+
+
+	void Start () {
+		//players [0] = "Johnnykiller25";
+		//players [1] = "bambambunnylover18";
+		//players [2] = "devslopes";
+		//players [3] = "Ponyl0ver";
+		Debug.Log ("Player One: " + players [0]);
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
+}
+
+
+pretty cool right? Well now we're going to use this list to make stuff DISPLAY IN UNITY (whattt).
+
+so using an array let's have a bunch of cubes appear on the screen. We'll use some cool logic and loops to do this!
+
+Right-click in the unity heiarchy (left by default) and go to create --> 3D object --> cube and make sure everything is 0 in position and rotation (it is). Drag it down into the assets folder (turns it into a prefab!). Once it's stored in the assets as a prefab delete the cube from the scene.
+
+Instantiate --> creates a prefab object. If you have "cube" in prefab you can use 
+public GameObject cubePrefab;
+-...as a public class as long as when you assign the script to an object (main camera) you drag the cube from prefabs over to the property called GameObject cubePrefab (in unity-editor!)
+
+Here is the code i attached to main camera with some comments:
+------------------------------------------------------------------
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class createCubes : MonoBehaviour {
+
+	public GameObject cubePrefab;	//public so our scripts can use it
+									//drag your cube prefab over to this script when you assign it to an object-
+									//-like main camera!
+	GameObject[] cubes = new GameObject[5];
+
+	float spacer = 0.5f;
+
+	// Use this for initialization
+	void Start () {
+		//go through array and create cubes accordingly
+
+		//let's use a C# for-loop to accomplish this!
+		for (int i = 0; i < cubes.Length; i++) {
+
+			GameObject cube = Instantiate (cubePrefab);
+			cubes [i] = cube;
+			//let's move our cubes along the X-axis!
+			cube.transform.position = new Vector3(i + (spacer * i),cube.transform.position.y);
+
+		}
+		
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
+}
+

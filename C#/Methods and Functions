@@ -1,0 +1,170 @@
+**FUNCTIONS AND METHODS IN C#**
+*also intro to button!*
+
+Functions are a way of modularizing your code into areas where you can have actions take place. Manipulate variables, do things, etc etc.
+
+****THE MORE YOU MODULARIZE YOUR CODE INTO FUNCTIONS THE MORE FLEXIBLE AND REUSABLE IT IS****
+****KEEP FUNCTIONS SHORT****
+
+Make a new C# script
+
+
+
+In unity-editor, right click on the heiarchy --> UI --> and create a button. You'll actually see a button appear in the scene / game tabs. Nice. Let's get this BUTTON to call the ATTACK function whenever it's clicked!
+
+First in properties play in the text field. Change it to say "attack" just because. This exists in the "Text" object under the canvas in heiarchy attached to "Button". Now find "onClick", this is where the magic is going to happen.
+
+First we need to drag our new C# script with functions to the main camera as we want it to exist from the start of the game. Remove any old scripts that might be attached to main camera at this time.
+
+Back in the button properties go to OnClick() and click the plus sign to add a compontent. It makes a blank place for you to drag "Main Camera" over to (do that now). Click where it says "no function" - it will list all your public functions! Select the Attack() function!
+
+Save everything, run your game and click on it in the game tag with the console selected. IT WORKS! nice.
+
+Now make a heal function! For this we'll be using Random.Range() which is a built-in piece of unity that can get us a random number from a range, NICE.
+
+Create a second button, change the text to heal, and similar to above make it call our Heal() function from the main camera's script uptownfunctionyouup (or whatever you name it). Have the random number be decided by a PRIVATE INT FUNCTION (returns an integer but can't be seen by anything outside of the script! Nice!
+
+**HERE IS OUR C# SCRIPT SO-FAR**:
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class uptownFunctionuup : MonoBehaviour {
+
+	int health = 100;
+	int attackPower = 25;
+
+	//private means no one else can access it
+	//public means other scripts can
+	public void Attack() {
+		//health = health - attackPower;
+		health-= attackPower;
+		Debug.Log ("Health after attack: " + health);
+	}
+
+	//gives random amount of health to the player!
+	public void Heal() {
+		int healAmount = GetRandomNumber ();
+		health += healAmount;
+
+		Debug.Log ("Received " + healAmount + " health");
+		Debug.Log ("You now have " + health + " health");
+	}
+
+	//private function to decide random number!
+	private int GetRandomNumber() {
+		return Random.Range (2, 10);	//random in between 2 and 10
+		//included in unity :)
+		//returns work just like they do in python!
+	}
+
+	// Use this for initialization
+	void Start () {
+		Debug.Log ("Health at start:  " + health);
+
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
+}
+
+
+Not so bad right? Well now we're going to go over:
+
+**PARAMETERS**
+hopefully very similar to what you've seen in python!
+
+regular objects in C#, strings, bools, integers, etc get recreated as parameters!
+Game Objects are things that get REFERRED TO and not recreated!
+
+In C# they're called methods btw.
+
+Here is out new and improved C# code that cares about a shield:
+
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class uptownFunctionuup : MonoBehaviour {
+
+	int health = 100;
+	int attackPower = 25;
+	bool shieldOn = true;
+	int shieldAmt = 15;
+
+	//private means no one else can access it
+	//public means other scripts can
+	public void Attack() {
+		//health = health - attackPower;
+		int damageToInflict = GetAttackDamage(shieldOn, shieldAmt, attackPower); 
+		health-= damageToInflict;
+		Debug.Log ("Health after attack: " + health);
+	}
+
+	//gives random amount of health to the player!
+	public void Heal() {
+		int healAmount = GetRandomNumber ();
+		health += healAmount;
+
+		Debug.Log ("Received " + healAmount + " health");
+		Debug.Log ("You now have " + health + " health");
+	}
+
+	//private function to decide random number!
+	private int GetRandomNumber() {
+		return Random.Range (2, 10);	//random in between 2 and 10
+		//included in unity :)
+		//returns work just like they do in python!
+	}
+
+	//you pass data into these little buckets and it renames them as it's called
+	//similar to python you've just got to declare the types ahead-of-time!
+	private int GetAttackDamage(bool isShieldOn, int theShieldAmount, int theAttackPower) {
+
+		int damage = 0;
+
+		if (isShieldOn) {
+			//NEW WAY TO CAST AS INT AFTER CASTING AS FLOAT
+			//THE FLOAT HAPPENS FIRST, ALLOWING THE MATH TO HAPPEN SAFELY
+			//THEN THE INT HAPPENS WHICH DROPS DECIMALS AND GIVES US WHAT WE WANNA RETURN
+			damage = theAttackPower - (int)(float)(theShieldAmount * 0.10f);
+		} else {
+			damage = theAttackPower;
+		}
+
+		return damage;
+
+	}
+
+	// Use this for initialization
+	void Start () {
+		Debug.Log ("Health at start:  " + health);
+
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
+}
+
+
+The most important things to notice here are:
+
+(int)(float)(calculation yada yada) --> awesome! Let's us calculate as float with floats then immediatly cast back to int with no failures!
+
+passing in parameters:
+//calling function
+myfunc(param1, param2, param3);
+
+//declaring function
+void myfunc (string parameter1, int parameter2, bool parameter3){}
+
+see the difference?
+
+private-vs-public:
+when looking for a button to call from our script in the button's onclick() sections i cannot see any of the private functions! Only the public ones! This makes sense per the name, don't you think?
