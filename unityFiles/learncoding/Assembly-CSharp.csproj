@@ -54,11 +54,15 @@
      <Compile Include="Assets\Conditionals.cs" />
      <Compile Include="Assets\Conditionals2.cs" />
      <Compile Include="Assets\createCubes.cs" />
+     <Compile Include="Assets\GameManager.cs" />
+     <Compile Include="Assets\humanoid.cs" />
      <Compile Include="Assets\lists.cs" />
+     <Compile Include="Assets\Player.cs" />
      <Compile Include="Assets\uptownFunctionuup.cs" />
      <Compile Include="Assets\Variables.cs" />
+     <Compile Include="Assets\zombie.cs" />
  <Reference Include="Facebook.Unity.Settings">
- <HintPath>/home/map/learncoding/Library/FacebookSDK/Facebook.Unity.Settings.dll</HintPath>
+ <HintPath>/home/map/Downloads/git/unity/unityFiles/learncoding/Library/FacebookSDK/Facebook.Unity.Settings.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>/opt/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

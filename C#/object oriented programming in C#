@@ -1,0 +1,66 @@
+**INHERITENCE AND OBJECT ORIENTED PROGRAMMING**
+-clean up your project
+
+we're going to create a C# script called "humanoid"
+
+a "class" is like a blueprint for a car. It's not the car itself BUT IT'S A BLUEPRINT.
+	once the blueprint is done you've got to actually MAKE THE CARS right?
+		this is the notion of object-oriented programming.
+
+first of all, notice how your classes inherit from Monobehavior. GENERIC UNITY CLASSES NEED THIS butttt if we get rid of "start" and "update" then we don't. Get it?
+
+clear out everything but the imports of UnityEngine and System.Collections
+
+so let's start out with our humanoid C# script which looks like:
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+//let's make blueprints for a humanoid based on things all humanoid characters will have
+public class humanoid {
+
+	private int health;
+	private int attackDamage;
+	private float movementSpeed;
+
+	public void Attack(){
+
+	}
+
+	public void Move() {
+
+
+	}
+
+	public void Die() {
+
+
+	}
+
+}
+
+
+now let's make a class describing the player! Create a NEW C# SCRIPT 
+Instead of inhertting from monobehavior let's inherit from humanoid!!! (whattt) like so:
+
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Player : humanoid {
+
+	// Use this for initialization
+	void Start () {
+		
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
+}
+
+
+Inherritence is awesome. Basically just making classes that are more specific of the classes above them. You can inherit and call the base functions and make slight changes specific to your child class. You can have a car class that defines 4 wheels and maybe child-class nissan keeps that the same but 18wheeler decides to add another 14?!
