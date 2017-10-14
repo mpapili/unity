@@ -1,0 +1,242 @@
+Unity free version comes with a starter folder.
+Go to your projects window and click "open" and look for "roll a zombie starter"
+
+from the udemy course (https://www.udemy.com/devslopes-unity3d/learn/v4/t/lecture/6006552?start=0) download the two starter zombie games.
+
+It's recommended you go:
+	windows > layouts > default
+-to use the same layout as the instructor this time around.
+
+You'll see many tabs like scene and game. Don't be intimidated by these.
+
+First thing to do is under assets in the project section down bellow go to prefabs then drag the floor object over into the heiarchy to the left.
+
+Look at the map a floor is on it! So holding down alt is to move in the screen and pressing Q let's you pan. Alright let's give these things some life. In the "assets" folder for "floor" drag that wood texture onto the floor object. It's a texture because it's a circle icon.
+
+Drag some colors from the "materials" folder over to cubes to change their colors. We're going to use gravity to roll forward, dodge zombies, and try and hit these colored cubes at the end of this floor thing that we're looking at.
+
+Next up we've got some prebuilt zombie creates in the game. From prefabs drag four little zombies over into the heiarchy. Change the cubes to be the same color as the zombies.
+
+Alright awesome so without further ado let's click the "play" button up top by the scene and play our game! So if you notice the zombies are animated. Okay cool. But they're not rolling really. We need to tilt our board! (the floor thing)
+
+Use the "E" button while holding something to enter rotate mode.
+
+Use the "W" button to enter move-object mode out of rotate mode.
+
+Awesome now we've got some tilt but the zombies aren't rolling yet! We need to apply premade physics to these zombies :O
+	select all four zombies by holding CRTL or SHIFT and selecting them all, then add component > physics > rigid body
+		still not rolling? We need a colider to teach it to interract with other objects! Still holding all of the zombies > add component > physics > sphere collider
+			you'll see sphere colliders created (yay!) but something's not right. The sphere isn't lined up with the zombie! Well you can offset it. See in the inspector (right side) the sphere collider can be offset by X Y and Z values? Play with those until they make sense!
+				Click the play button, shift over to your "scene"
+
+**CAMERA CONTROLS**
+Super important tip. The "game" section after you press the play button will only show you what the "main camera" can see!! be sure a main camera exists and is positions to be where you want it to be before you start working!
+
+So now for the sake of the game we're going to want the player to "switch" between the zombies. This requires us to write our own (first) script for unity! Let's put this in our assets folder in the project explorer below so right-click assets and create C# Script.
+	Call it game-manager - it will run our whole game.
+	Drag the script object over to "Main Camera" to apply a script to an object (unity is unique in this way!)
+	Double-click the script to open it. Please, if you're running on Ubuntu or Linux check the install notes regarding installing the mono-complete package as the one that comes in the .deb package wasn't working at all.
+
+	Monodevelop is a veryyy simple IDE meant only for this really. You'll see a "start" function and an "update" function. THESE ARE DEFAULT FOR ALL OBJECT SCRIPTS.
+	"start" is called once at the creation of the object. We set ours to the camera so this will run at the beginning of the game.
+	"update" will run over-and-over repeatedly every X amount of time. Cool.
+
+	Let's make this so that you can select zombies
+		- when a zombie is selected it gets bigger
+		- you can press the "up" key and then it will move forward
+
+First import:
+	using System.Collections.Generic;
+
+this will allow us to use lists! 
+
+Then in your GameManager class:
+	public GameObject selectedZombie;
+	public List<GameObject> zombies;
+
+	GameObject means that you will drag an object from the unity-editor to tell it what this "variable" will be! It's awesome, read under this!
+
+	This makes an object in the unity editor named selectedZombie and a list of zombies! Since they're public if you save it in mono you'll see these objects available in the camera inspector! Check out that empty "zombies" list! Set the number of elements to 4 in unity-editor then drag over each zombie from the heiarchy into the element number you want for it (wtf woah). Make selected zombie at the start the yellow zombie.
+
+	Now let's find a way to make the selectedZombie BIGGER if it's selected. His scale looks to be 1,1,1 (x,y,z). 1.4 would be a good size right?
+
+	Over in mono let's make a Vector3 object (x,y,z) 
+
+	public Vector3 selectedSize;
+	public Vector3 defaultSize;
+
+	save it and head over to unity-editor. Select the main camera and fill in the values 1,1,1 for defaultSize and 1.4,1.4,1.4 for selectedSize.
+
+	Arrow keys are going to have to select zombies and we'll make sure that the default size is set from the beginning. Remember, voids are just functions with no returns :)
+
+	void SelectZombie(GameObject newZombie) {
+		newZombie.transform.localScale = selectedSize;	
+	}
+
+in the start function call this:
+
+	SelectZombie (selectedZombie);
+
+	What this is doing is making the gameobject that is selectedzombie (which we set to be the yellow one at the start) have it's localscale transformed (unity stuff) turned to 1.4,1.4,1.4 and if you save the scene and click play in unity-editor IT WORKS the yellow zombie is bigger!	
+
+	Now we need to be able to select the zombie with the arrowkeys! We can put that in our gamemanager code with no problems.
+
+	KEYPRESSES ARE WAITED FOR IN THE UPDATE FUNCTION
+	within update:
+
+		if (Input.GetKeyDown ("left")) {
+		
+		}
+
+		if (Input.GetKeyDown ("right")) {
+		
+		}
+
+		if (Input.GetKeyDown ("up")) {
+
+		}
+
+	These blank conditionals are waiting for the inputs we'll allow which is arrow left, right (to select zombies) or up (to do a thing).
+
+	Now we need to teach it how to find which zombie is on selectedzombie's left or right!!!! Let's write code to support that. To keep track of the position of the current zombie. For this we'll use a private integer (private because only our code needs it, unity doesn't need a game object or to use the integer in any way)
+
+	Under GameManager do:
+
+		private int selectedZombiePosition = 0;
+
+	new function to find zombie on the left!
+
+	void GetZombieLeft() {
+		if (selectedZombiePsotion == 0) {
+			SelectZombie(zombies[3]);
+		} else {
+			GameObject newZombie = zombies[selectedZombiePosition - 1];
+			SelectZombie(newZombie);
+			selectedZombiePosition = selectedZombiePosition - 1;
+		}
+	}
+
+	...basically this makes sure that if we're on zombie0 then we go to zombie3 else just go left one. NOW within the conditiional for the "left" key pushed:
+
+		GetZombieLeft ();
+
+	getzombieright can use the same logic:
+
+		void GetZombieRight() {
+		if (selectedZombiePosition == 3) {
+			SelectZombie(zombies[0]);
+		} else {
+			GameObject newZombie = zombies[selectedZombiePosition - 1];
+			SelectZombie(newZombie);
+			selectedZombiePosition = selectedZombiePosition + 1;
+		}
+	}
+
+now let's enhance them to update our positions:
+
+	void GetZombieLeft() {
+		if (selectedZombiePosition == 0) {
+			selectedZombiePosition = 3;
+			SelectZombie(zombies[3]);
+		} else {
+			selectedZombiePosition = selectedZombiePosition - 1;
+			GameObject newZombie = zombies[selectedZombiePosition];
+			SelectZombie(newZombie);
+			//selectedZombiePosition = selectedZombiePosition - 1;
+		}
+	}
+
+	void GetZombieRight() {
+		if (selectedZombiePosition == 3) {
+			selectedZombiePosition = 0;
+			SelectZombie(zombies[0]);
+		} else {
+			selectedZombiePosition = selectedZombiePosition + 1;
+			GameObject newZombie = zombies[selectedZombiePosition];
+			SelectZombie(newZombie);
+			//selectedZombiePosition = selectedZombiePosition + 1;
+		}
+	}
+
+and finally let's update selectZombie:
+
+	void SelectZombie(GameObject newZombie) {
+		selectedZombie.transform.localScale = defaultSize;
+		newZombie.transform.localScale = selectedSize;	
+		selectedZombie = newZombie;
+	}
+
+Now for the up-arrow we're going to want to apply some force to push up the zombie!
+
+	void PushUp() {
+		Rigidbody rb = selectedZombie.GetComponent<Rigidbody> ();
+		rb.AddForce(0,0,10, ForceMode.Impulse);
+	}
+
+	this creates "rb" which is an object that contains all the libraries from the rigidbody we gave the zombies in the editor!
+
+	add:
+		PushUp();
+	-in the up-arrow conditional and you're good to go! We have a functioning "game" in unity now!
+
+
+So before we work on "score" we need to make an actual UI! Add "text" to the canvas by right-clicking blank space in the heiarchy and adding UI > Text 
+
+	We'll edit this X,Y,Z in its properties from the game view since it'll show us the camera! Make it freaking huge until you can see it them move it to the desired position with the camera. Change the color, font, etc as-needed.
+
+	To edit the skybox you do it by-camera. Select the camera and add component "skybox". Then drag your skybox from the skybox folder under assets into the skybox selection. Run your game and see.
+
+	Now we need to import something to change text! At the beginning:
+
+	using UnityEngine.UI;
+
+	then within GameManager
+
+		private int score = 0;
+		Public Text scoreText;
+
+	Now in the start let's make the textbox equal what we want!
+
+		scoreText.text = "Score: " + score;
+
+	Now everytime a block is hit we need to add score everytime a block gets pushed!
+
+	public void AddPint() {
+		score = score + 1;
+		scoreText.text = "Score: " + score;
+	}
+
+	Now we need to teach it when the tiles are being "hit" by the zombies! Select all the cubes holding shift and addcomponent > physics > boxcollider. Check the "is trigger" box as this won't be physicsy.
+	Create a new c# script called "tile" then add:
+
+	public GameManager gameManager;	//imports gamemanager!
+
+	void OnTriggerEnter(Collider other) {
+		gameManager.AddPoint() ;
+	}
+	
+	then select the cubes and drag the new script over to the "add component" button (woahh) and BOOM roasted.
+	Under the camera who has a component of gamemanager we have to teach it what Text is "scoreText", so drag out scoretext object from the heiarchy over here.
+	Under the cubes who've we've added those box collider triggers to add a component of the tile text and set "game manager" to the CAMERA (drag camera from heiarchy) which has a game manager component. NICE.
+
+	Now how's about some music? Let's add an audio source.
+	Add component on the camera > audio source and drag some game music from the assets folder in there!
+
+	EXCELLENT
+
+now let's add a noise for whenever the tiles get hit:
+	in the tile script:
+
+	public AudioClip hit;
+	AudioSource source;
+
+in the start function:
+	source = GetComponent<AudioSource> ();
+
+ in the special OnTriggerEnter function
+
+		source.PlayOneShot (hit);
+
+for the four tile cubes select them all and add audio source that does NOT play on awake and make sure the "beep" from assets is both the source AND the hit.
+
+Great stuff! Save project and close.

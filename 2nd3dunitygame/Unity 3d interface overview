@@ -1,0 +1,43 @@
+**UNITY 3D INTERFACE OVERVIEW**
+tips and tricks for the editor! Definitely save this!
+
+Most developers will end up changing the layout overtime
+	Window -> layout
+		some preconfigured layouts for yourself
+		this course will leave it on the default
+
+GAME
+	--> tab that shows what actually happens in the game
+
+Asset Store
+	--> store where you can buy literally anything, effects, assets, textures, etc
+
+GameObject
+	--> this tab up top lets you create things that qualify as game objects. Create a cube from this menu. You can move it through the same 3d arrows as blender.
+
+Main Camera
+	--> camera is going to be there from the start. When selected you get a camera preview in the bottomn right. Move it and focus on this preview to get it just as you want. It moves the same way as normal gameobjects otherwise
+	--> must have "camera" component checked off!
+
+ROTATE
+	Press "E" to enter rotate mode. You can rotate amongst three axises. The outmost will rotate the entire object according to where your camera is.
+	This can also be used on the camera itself.
+
+SCALE
+	scale size change across any axis by using the "R" key! This enters scale mode!
+
+Select/Move Mode:
+	Press "R" to enter the select/move mode
+
+Mesh Renderer
+	--> renders the "mesh" which is what the player actually sees
+	--> if unchecked the player cannot see the object!
+
+GameObjects
+	--> have components
+	--> have scripts that can be dragged onto them when you write code
+
+MANUALLY SELECT MODE:
+	to select mode (rotate, scale, camera, etc) in the top-left you'll see icons that look like sizing, a hand grabbing something, a cross, etc. Use these to change if keyboard shortcuts do not work.
+
+Your assignment for this one will be to play around, add objects, cameras, scripts, etc. Don't make a game just play.
