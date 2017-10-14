@@ -1,0 +1,23 @@
+**Project Creation and Importing Assets**
+
+Create a fresh project in unity.
+
+At this point devslopes is rearranging his layout so that he can see the "game" and "scene in the same window. You can do this if you want with layout 2-by-3 but whatever.
+
+*Save scene, save project, and continue.*
+
+At this point we download the assets files from the course program.
+
+We're getting rid of all of the "obj" files and "max" files.
+	We need "textures" and "FBX" files
+
+From your file manager drag the entire folder once it's thinned out (Fantasy Demon Cave) into the project tab in "assets".
+	--> this can take up to 45 minutes to import! It's totally normal and has always been the way it's been.
+	--> confirmed. This is taking a while -_-
+	--> ended up only taking like 3-4 minutes, looks like SSD's win the day. Unity should be done on a computer with a nice plextor drive I bet.
+
+After it's imported check out what it offers. Look at those demos. The demos show you some posibilities of what you can do with just this asset pack!
+
+Import and try it out!
+
+Don't worry, you're just learning the ins and outs of the unity-editor and how to handle some of these things now. It's still very important. We'll learn more of the 'doing' part next time.
