@@ -1,0 +1,54 @@
+**Working with Lighting and Materials in Unity**
+So we've imported the demo in there.
+
+Looks good but why is it so bright? It almost looks happy with a hellish land. Let's change this directional light!
+
+If you turn off the directional light (component feature). you still have some light?
+	--> because of the default unity skybox!
+
+LET'S CHANGE THE SKYBOX:
+	window --> lighting --> skybox settings
+		aha! That's how we get to this skybox!
+		let's get rid of it
+			select the circle next to the default skybox
+				play with the extra skyboxes you have first
+				eventually go to "scene" and select "none" as your skybox.
+					aha! it's black now. No light!
+
+SCENE LIGHT TOOL:
+	for editing dark games click the "sun" icon under "scene" tab to flip the fake light on and off to see what you're doing while editing a dark game!
+
+CAMERA FOR THIS DEMO:
+	use the tips you learned last lesson "E" for rotate "W" for move
+		move the camera so it's facing the "demon face" thing
+
+Removing unused assets:
+	this scene has a lot of background crap the user will never see. Let's remove it. Even if you can't see it it's still using someee processing power (unity does a good job of not rendering things off screen but it's not perfect).
+		--> press shift and select a bunch of things and use CTRL+Delete to get rid of it all
+			--> kill the lava and everything behind the camera
+
+CAMERA COMPONENTS:
+	select main camera
+		look at "projection", change from perspective to other modes and look how it flattens stuff out or omits it. Great for mobile! We won't be using it though. Pretty cool to know. In fact, this could be useful for some 3d games depending on your style! Be sure to consider this!
+
+LET'S MAKE "LAVA"
+	--> GameObject --> 3d object --> 3D PLANE
+		--> makes a plane!
+			--> let's make the "ground" 0,0,0 so let's make this plane 0,0,0
+				--> move the whole rest of the demo scene UP so the lava is where we want it.
+				--> adjust camera as well
+
+	--> use the scale tool to make it large enough for you
+	--> now let's put a texture on our plane!
+		THIS IS HOW YOU MAKE LIQUID AT A LEVEL
+		in assets create a new folder called "materials"
+			right click in it and create a new material called "lava"
+				select texture for it. We've already imported textures
+					--> Albedo (means radiation or reflection) is the setting for you
+					--> once selected, drag the material in assets and drag it over to the plane that will become the lava and BOOM roasted.
+			play with tiling numbers in the material's inspector window
+				8 x 8 looks nice
+					12 x 12 also nice
+						10 x 10 perfect
+				this tiling is how frequently the texture repeats itself!
+
