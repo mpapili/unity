@@ -1,0 +1,19 @@
+**Build Platforms**
+	Right now we've been working entirely in PC/web format.
+		let's change it to be a MOBILE game!
+
+
+File --> build settings --> click iOS and click "open download page"
+	--> install from package that it downloads
+		--> it looks like ours might already be there! We have all packages except for some proprietary consoles (xbox, wii, etc)
+	--> let's start off on ios
+		--> if you work on windows you won't be able to export with xcode :-/ so start with android instead
+		--> select "android" and click "switch platform"
+			--> if you go down to your game you can now change your aspect ratio between several popular devices!
+			--> the switch itself will take a minute, changing some textures.
+
+In the fantasy demon cave folder let's find the bone bridge
+	--> place it dead-center (reset position to 0,0,0 and adjust accordingly for camera
+	--> change it around.
+	--> we're going to have the bridge "moving"
+		--> pull it so there's visible lava between it and the background
