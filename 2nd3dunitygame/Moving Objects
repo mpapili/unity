@@ -1,0 +1,84 @@
+**MOVING OBJECTS IN UNITY 3D**
+
+We're going to use a SCRIPT to get our combined-object platform moving!
+
+Prior to writing this script we should put the object into a PREFAB
+	--> a prefab is a reusable object that you can instantiate or use/duplicate
+		--> you can bundle it and drag+drop it anytime
+			--> making your own presets
+
+in assets create a new folder and call it "prefabs"
+	--> take your full platform combined-object and drag it into prefabs
+		--> nice! you have a preset you made for yourself :)
+	--> any changes you make will be applied too ALL the objects made from that prefab
+		--> pretty cool
+
+now for scripts!
+	--> create a scripts folder under assets
+		--> in this folder create a script called "object" for a moveable object
+			--> double click it and get it open in MONODEV! (WOOHOO)
+
+sooo we want to make this look like infinitely looping ground. We won't actually use infinite ground as that would kill memory.
+	we definitely want to use "Update{}" to do this for our object script! It updates every frame (yes, videogame frame!)
+		--> all games generally will use this
+
+So how do we get this combined-object moving? Well select it in unity. It has a component called "transform" which declares its position
+	--> we can access this in C# via code!
+
+
+**TIME.DELTATIME FRAMERATE INDEPENDENT**
+Add this into the update function of our object script:
+
+			transform.Translate(Vector3.left * (20 * Time.deltaTime));
+
+	this can access the "transform" component (make sure its lowercase) of any game object it's attached to and manipulate the number (.Translate) via the args given.
+	Vector3.left is another part of unity. It says we're moving this vector (transform component is a vector) TO THE LEFT.
+	20 is just a guess we can change this
+	Time.deltaTime
+		--> computers have different framerates. We can't use frames for EVERYTHING as the framerate for an iphone4 vs an iphoneX would be a totally different game!
+			--> Time.deltaTime will make them move at the same speed and framerate only controls slowness.
+				--> this is usually excluded in CONSOLE development. Interestinggg.
+				--> Time.deltaTime is the TIME between this frame and the LAST frame. Woah HUGELY important
+
+**SELF-TAUGHT**
+	--> we made ours at a weird angle so we'll need to use ".right" instead of ".left" !
+	--> instructor calls his class + script "Object" and "Objects" these are overloaded and causes tons of errors!
+		--> make it something obscure like "objectsScript" and MAKE SURE THE CLASS NAME IS CHANGED TOO!
+
+Drag the script from assets (after saving) to the combined object of the platform. Save everything and "run"
+	--> you should see the platform fly humorously fast to the side. THIS IS GOOD.
+
+
+**SERIALIZED FIELD**
+
+Let's make a private variable that the inspector in unity can see with [SerializedField] and have THAT variable be what used to be our hardcoded "20" for speed.
+
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class objectsScript : MonoBehaviour {
+
+	//Makes a private variable that the "inspector" in unity can see
+	[SerializeField] float objectSpeed = 1;
+
+	// Use this for initialization
+	void Start () {
+
+	}
+
+	// Update is called once per frame
+	void Update () {
+		//ACCESS ASSIGNED OBJECT'S TRANSFORM COMPONENT
+		//MOVE LEFT 20 * [time since last frame]
+		transform.Translate(Vector3.right * (objectSpeed * Time.deltaTime));
+	}
+}
+
+
+THIS IS AWESOME! Not only is it moving at a great speed BUT you can change the value of this PRIVATE INT from the INSPECTOR in unity!
+	--> you can do this even while the game is running! WHATTTT!
+		--> [SerializedField] is HUGELY Important!
+			--> we switched it to "4" which seemed nice DURING GAMEPLAY. Amazing.
+			stopped at 12:17
