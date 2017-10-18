@@ -61,7 +61,7 @@ using UnityEngine;
 public class objectsScript : MonoBehaviour {
 
 	//Makes a private variable that the "inspector" in unity can see
-	[SerializeField] float objectSpeed = 1;
+	[SerializeField] private float objectSpeed = 1;
 
 	// Use this for initialization
 	void Start () {
@@ -78,7 +78,71 @@ public class objectsScript : MonoBehaviour {
 
 
 THIS IS AWESOME! Not only is it moving at a great speed BUT you can change the value of this PRIVATE INT from the INSPECTOR in unity!
+	--> make it private. ALL IN-CODE VARIABLES SHOULD BE PRIVATE. This is called "Data Encapsulation" and it's very important for coding
 	--> you can do this even while the game is running! WHATTTT!
 		--> [SerializedField] is HUGELY Important!
 			--> we switched it to "4" which seemed nice DURING GAMEPLAY. Amazing.
 			stopped at 12:17
+
+NOTE - saving things in play mode DO NOT affect them permanently. They're just for testing.
+
+So now that we're having it move let's find a trick to make it seeeeem "infinite" when it's really not
+
+First let's make it be FOUR platforms in-reality. Yes FOUR. It'll seem stupidly long but trust me.
+THE METHOD WE'RE GOING TO USE will be "if the platform gets to the edge of the scene, when it hits that cordinate, reset it to it's origin point!
+	--> for our RESET position the X-axis is 98.4, we'll set that as a float for our starting position (private)
+	--> let's, in our update function, check if the current x value (transform.localPosition.x) is equal to or less than the reset position value!
+		--> so we're going to start with a guess. Let's sayyy... -120!
+			--> it's really close actually! Pause in game-mode to adjust and find the RIGHT value for a perfect lineup!
+				--> ours is actually -80.5 so change it to that in the code and we end up with:
+
+SO we end up with:
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class objectsScript : MonoBehaviour {
+
+	//Makes a private variable that the "inspector" in unity can see
+	[SerializeField] private float objectSpeed = 1;
+	private float resetPosition = 98.4f;
+
+	// Use this for initialization
+	void Start () {
+
+	}
+
+	// Update is called once per frame
+	void Update () {
+		//ACCESS ASSIGNED OBJECT'S TRANSFORM COMPONENT
+		//MOVE LEFT 20 * [time since last frame]
+		transform.Translate(Vector3.right * (objectSpeed * Time.deltaTime));
+
+		if (transform.localPosition.x >= resetPosition) {
+
+			Vector3 newPos = new Vector3(-80.5f, transform.position.y, transform.position.z);
+			transform.position = newPos;
+
+		}
+
+	}
+}
+
+
+INCREDIBLE it actually works!
+
+Things to note:
+	float value of local (starting?) position of object script is assigned to = transform.localPosition.x  (or y or z)
+	TO CHANGE a position make a "new Vector3" variable:
+		Vector3 newPist = new Vector3(x-value, y-value, z-value)
+	current position value:
+		transform.position.x (or y or z)
+
+see code above for great example!
+
+
+
+
+
+
