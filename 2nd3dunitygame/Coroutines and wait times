@@ -1,0 +1,91 @@
+**COROUTINES AND WAIT TIMES**
+
+We're going to learn a lot more about unity in this one supposedly so let's go.
+
+Drag "rock04_lava" or something like that anywhere onto the scene.
+	--> drag it so it's nicely in the camera
+
+The floating rocks like this are just going to go up and down and it'll be your responsibility to dodge it!
+	--> we're going to just get the up and down movement going first
+	--> first let's find our ranges (lowest range and highest range)
+
+	--> we COULD use the old way but i think coroutines will be better!
+
+Make a new C# script called "rock"
+	--> open the file in monodevelop
+
+First let's add a serializedfield for the top position and bottom position that we'll use later
+	[SerializedField] Vector3 topPosition;
+	[SerializedField] Vector3 bottomPosition;
+
+let's go find these in the games and figure out what the top and bottom positions will be!
+	--> drag the rock script onto it!
+		--> now let's record our rock
+		bottom position is 2.7
+		top position is 19.8
+
+alright so our rock script is attached right? In the inspector let's throw in these values to our serializedfields since unity can see them!
+
+so we could have it move towards the bottom until it hits bottom position then go back up
+	--> make it smooth! have it wait at the bottom for a short bit (we'll find out how)
+
+**COROUTINES**
+IEnumerator needs to be understood to code in unity. Be sure to understand it!
+	--> but actually, learn IEnumerator
+
+We won't be using the update function (whaaaat) we're using coroutines:
+	--> a sequence of events
+		--> wait, then do me
+			--> wait, then do ME
+				--> wait then... (get it?)	
+
+	//IEnumerator is an advanced C# topic (google it)
+	//target will be the top or bottom!
+	IEnumerator Move(Vector3 target) {
+
+		//we need absolute value for distance!
+		//NOTICE how we do math on vector3's THEN take the "y" value!
+		while (Mathf.Abs((target - transform.localPosition).y) > 0.20f) {
+
+			//notice above we use ">" instead of "==" because games often skip values!
+
+			//Ternary expressions! Very powerful! Three expressions
+			//[section to be true or false] ? action if true : action if false;
+			Vector3 direction = target.y == topPosition.y ? Vector3.up : Vector3.down;
+			transform.localPosition += direction * Time.deltaTime;
+
+			//IEnumerator can return things, but if it returns nothing it'll loop!
+			//return null to tell it to loop again, will go forever!
+			yield return null;
+
+		}
+
+		print("Reached the target");	//use print whenever you inherit from monobehavior
+						//debug.log has multiple parameters too!
+
+		yield return new WaitForSeconds(0.5f);	//wait half a second
+		//powerful ternary - created a vector3 called "newTarget"
+		//-it'll be bottomPosition if we're currently topPosition ELSE it becomes topPosition
+		Vector3 newTarget = target.y == topPosition.y ? bottomPosition : topPosition;
+
+		//starting this as a coroutine (looks like recursion almost!)
+		StartCoroutine(Move(newTarget);
+
+	}
+
+
+AWESOME! Now in "start" be sure to kick off the coroutine for the first time!
+
+	StartCoroutine(Move(bottomPosition));	//bottom because we start up top
+
+IT WORKS! It's a little slow!
+	--> he's assigned us how to make the object move faster!
+
+OUR SOLUTION THAT ROCKS:
+	make a 
+
+	[SerializeField] float speed;
+
+	Then in the inspector pick a value and in the script have that value multiply time.TimeDelta !!!!
+		--> so cool!
+		--> be sure to save in unity after you do that!
