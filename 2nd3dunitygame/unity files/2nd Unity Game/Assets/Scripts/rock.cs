@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class rock : MonoBehaviour {
+public class rock : objectsScript {
 
 	[SerializeField] Vector3 topPosition;
 	[SerializeField] Vector3 bottomPosition;
@@ -13,7 +13,11 @@ public class rock : MonoBehaviour {
 
 		StartCoroutine (Move (bottomPosition));
 	}
-	
+
+	protected override void Update(){
+		base.Update ();
+	}
+
 	//IEnumerator is an advanced C# topic (google it)
 	//target will be the top or bottom!
 	IEnumerator Move(Vector3 target) {
