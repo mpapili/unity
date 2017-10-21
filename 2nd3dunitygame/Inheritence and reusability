@@ -1,0 +1,137 @@
+**INHERITENCE AND REUSABILITY**
+so we have it so that when you press the "play" button the rock moves up and down (NICE)
+So our perspective looking into games is changing a bit and hey, it's not as easy at it looks AND it's easier at the same time. Really interesting.
+
+So we need to get this rock moving along WITH the platform. We don't want to rewrite code and we already have the platform moving AND WE MUST NEVER REPEAT OURSELVES IN PROGRAMMING EVER.
+
+Let's do some REFACTORING and write some more code. object.cs is the thing that moves remember. We know it has an object speed that's changed publically, we have a reset position, we have a position where the platform spawns on the other side.
+	--> we also hard-code in the position it moves at/to... hmm... that's not reusable? Let's make them into serializable fields!
+		--> serializable fields can be changed depending on what object they're applied to. Think, writing code so that nothing will ever really be hard-coded.
+			--> hard-coded numbers are referred to as "magic numbers" and are bad.
+
+			let's change it to a serializefield (keep it as a private and float) for resetPosition!
+			create the new serializefield privat float "startposition" and hard code it to be what you used to have there then include that in your vector3 transform statement in the update function
+
+Good! Now that still works exactly the same for the platforms, let's get this rock moving better.
+Instead of inheritting from monobehavior, let's inherit from "objectScript" ! 
+	--> before we do this we'll have to updated out "update" function in objectsscript.cs to be protected virtual (so protected virtual void update(){} got it?)
+		--> now inherrit from "objectscript" instead of monobehavior in the rock script.
+		--> now make an update override function:
+
+	protected override void Update(){
+		base.Update ();
+	}
+
+and play the game. Dude check it out! The rock resets itself correctly and moves with the platforms!
+
+So it's reseting but it's reseting wayyy off to the side with the playforms. Let's find a value for the rocks that we can use for our override update function :)
+	--> we've done this before let's do it again. Find a good reset position by running the game until the rock is off camera
+		--> make the starting position somewhere further to the right of the camera.
+		--> since these are serialized fields YOU CAN PLUG THEM RIGHT IN USING THE UNITY EDITOR
+
+	then CMD+D to duplicate these rocks so it seems more continuous
+
+Looks good! We've got three rocks reseting to a reasonable position. Now let's desync them by just changing their initial position at the start of the game. Just jumble them up a bit.
+		--> wow it's actually looking really good.
+
+So instead of hard-coding overrides into inherritence we simply serialized a few fields and THROUGH THE UNITY EDITOR assigned different values before copying the rocks!
+	--> this worked perfectly.
+		--> let's change the platform speed (serialized) down to 2 and change the rocks (serialized) up to 2!
+
+This lesson was easy even though we got a lot done. That's the power of reusing code you already wrote! MAKE EVERYTHING REUSABLE FOREVER.
+
+
+HERE IS THE FINAL ROCK CODE:
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class rock : objectsScript {
+
+	[SerializeField] Vector3 topPosition;
+	[SerializeField] Vector3 bottomPosition;
+	[SerializeField] float speed;
+
+	// Use this for initialization
+	void Start () {
+
+		StartCoroutine (Move (bottomPosition));
+	}
+
+	protected override void Update(){
+		base.Update ();
+	}
+
+	//IEnumerator is an advanced C# topic (google it)
+	//target will be the top or bottom!
+	IEnumerator Move(Vector3 target) {
+
+		//we need absolute value for distance!
+		//NOTICE how we do math on vector3's THEN take the "y" value!
+		while (Mathf.Abs((target - transform.localPosition).y) > 0.20f) {
+
+			//notice above we use ">" instead of "==" because games often skip values!
+
+			//Ternary expressions! Very powerful! Three expressions
+			//[section to be true or false] ? action if true : action if false;
+			Vector3 direction = target.y == topPosition.y ? Vector3.up : Vector3.down;
+			transform.localPosition += direction * Time.deltaTime * speed;
+
+			//IEnumerator can return things, but if it returns nothing it'll loop!
+			//return null to tell it to loop again, will go forever!
+			yield return null;
+
+		}
+
+		print("Reached the target");	//use print whenever you inherit from monobehavior
+		//debug.log has multiple parameters too!
+
+		yield return new WaitForSeconds(0.5f);	//wait half a second
+		//powerful ternary - created a vector3 called "newTarget"
+		//-it'll be bottomPosition if we're currently topPosition ELSE it becomes topPosition
+		Vector3 newTarget = target.y == topPosition.y ? bottomPosition : topPosition;
+
+		//starting this as a coroutine (looks like recursion almost!)
+		StartCoroutine(Move(newTarget));
+
+			}
+}
+
+
+
+HERE IS THE FINAL OBJECTSSCRIPT CODE:
+
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class objectsScript : MonoBehaviour {
+
+	//Makes a private variable that the "inspector" in unity can see
+	[SerializeField] private float objectSpeed = 1;
+	[SerializeField] private float resetPosition = 98.4f;
+	[SerializeField] private float startPosition = -80.5f;
+
+	// Use this for initialization
+	void Start () {
+
+	}
+
+	// Update is called once per frame
+	protected virtual void Update () {
+		//ACCESS ASSIGNED OBJECT'S TRANSFORM COMPONENT
+		//MOVE LEFT 20 * [time since last frame]
+		transform.Translate(Vector3.right * (objectSpeed * Time.deltaTime));
+
+		if (transform.localPosition.x >= resetPosition) {
+
+			Vector3 newPos = new Vector3(startPosition, transform.position.y, transform.position.z);
+			transform.position = newPos;
+
+		}
+
+	}
+}
+
