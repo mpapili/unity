@@ -1,0 +1,133 @@
+**RIGIDBODY AND ADDING FORCE WITH PHYSICS**
+
+Continuing the "haunted zombie rush" project!
+We've got a zombie that kinda freaks out everytime you click. Alright that works!
+
+Let's introduce PHYSICS into our game!
+
+"Do we have to use physics into our game?"
+	--> NOPE! you can simulate physics with code if it's simple enough!
+		--> over X miliseconds, add velocity, then decrease
+			--> if your game isn't super complex DON'T USE FULL PHYSICS! Simulate it!
+
+We'll use actual physics in our game. They're already kinda there, you have to physics enable the zombie.
+
+Select your object
+	--> component, physics, add sphere colider
+	--> use the coordinate properties to up the sphere colider to where we want it on the zombie
+	--> use radius to increase the sphere, it's fine!
+	--> VERY IMPORTANT to get this collider as close as possible for your game to look good
+
+Obstacles:
+	--> our rocks don't have colliders.
+
+--Component, physics, add "box collider" to the first rock
+	--> adjust again, default was pretty nice this time.
+		--> make it a tiny bit smaller with size and good
+
+Run the game anddd.... nothing happens!
+	--> we have colliders but our objects are still imune to physics!
+
+WE NEED TO ADD A RIGIDBODY
+	--> component that allows the body to be affected by the physics
+
+Mass - weight, how much influence it hs
+drag - how much falling is slowed
+angular drag - drag on rotation (woah)
+use gravity - object will fall if this is on
+is kinematic - object can move other objects BUT won't be affected by physics themself!
+
+THEY COLLIDE! So cool. Keep gravity on with the zombie.
+
+Now let's get our other rocks in line. We didn't make a prefab (BAD) so we'll have to delete them and put clones of the new good rock in their spots
+	--> delete the bad rocks
+	--> drag the "good rock" into the prefabs folder!
+
+CTRL+D to recreate our rocks anddd we're golden!
+
+Let's get our zombie jumping! This will take some code!
+
+Open the "player" script!
+
+Whenever the jump is clicked we're going to want to add some force to our character, right?
+
+We'll add a force and gravity will then be enabled from unity and it'll take care of the down part!
+
+UPDATE IS BAD FOR RIGIDBODIES!
+	--> every "fixed" frame evenly distributes framerate instead of going as fast as the system can applie "update" to!
+	--> use fixedupdate() everytime. NOT REGULAR Update() !!!
+		--> you can use both
+
+We'll use some "drag" to slow the dropping and now increase the gravity for the whole world!
+
+Edit --> Project Settings --> Physics
+	--> let's take it from -9.8 and over to -16
+	--> let's set mass to 12 and play around
+
+We want to turn off velocity between jumps! (can't compound!)
+	--> rigidbody.velocity - new Vector2(0,0);	//easy reset!
+
+HOLY COW IT WORKS we kind of have a game going!
+
+Play around with these numbers.
+
+Here is the commented code we ended up with :) for player.cs (attached to player object as script component)
+
+
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Player : MonoBehaviour {
+
+	[SerializeField] private float jumpforce = 100;
+
+	//create an animator object --> searches animator object 
+	private Animator anim;
+	private Rigidbody rigidBody;
+	private bool jump = false;
+
+	//always make everything private if you can! DATA ENCAPSULATION	
+
+	// Use this for initialization
+	void Start () {
+		//will search object script is assigned-to for an animator component (our zombie player has one!)
+		anim = GetComponent<Animator> ();
+		rigidBody = GetComponent<Rigidbody> ();	//will search for rigidbody component 
+
+	}
+	
+	// Update is called once per frame
+	void Update () {
+
+		//let's capture the input of a mouse-click or tap
+		if (Input.GetMouseButtonDown (0)) {		//"0" means left-click!
+			rigidBody.useGravity = true;	//turn on gravity after first click! :)
+			anim.Play("jump");	//will play the jump animation
+			jump = true;
+		}
+
+	}
+
+	//FixedUpdate > Update for rigidbodies
+	//controls framerate for update rate
+	void FixedUpdate() {
+
+		if (jump == true) {
+
+			jump = false;
+			//here's how you add physics force to a rigidbody
+				//use autocomplete on "." to check out the types of forcemodes
+			rigidBody.velocity = new Vector2 (0,0);
+			rigidBody.AddForce(new Vector2(0, jumpforce), ForceMode.Impulse);
+
+
+		}
+
+	}
+
+}
+
+
+
