@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;	//assertions import
 
 public class Player : MonoBehaviour {
 
@@ -12,6 +13,17 @@ public class Player : MonoBehaviour {
 	private bool jump = false;
 	[SerializeField] private AudioClip sfxJump;	//going to be sound effect
 	private AudioSource audioSource;
+	[SerializeField] private AudioClip sfxDeath;	//sound upon death
+
+	//built-in unity function - see unity docs
+	void Awake() {
+
+		//creates red error unless these are assigned
+			//only works in debug mode
+		Assert.IsNotNull (sfxJump);
+		Assert.IsNull (sfxDeath);
+
+	}
 
 	//always make everything private if you can! DATA ENCAPSULATION	
 
@@ -51,6 +63,17 @@ public class Player : MonoBehaviour {
 
 
 		}
+
+	}
+
+	void OnCollisionEnter(Collision collision) {
+		//game objects have tags! Create tags in unity
+		if (collision.gameObject.tag == "obstacle") {
+			rigidBody.AddForce (new Vector2 (80, 30), ForceMode.Impulse);	//apply some force to him
+			rigidBody.detectCollisions = false;		//pull physics away from him so he dies!
+			audioSource.PlayOneShot (sfxDeath);	//play the death sound
+		}
+
 
 	}
 

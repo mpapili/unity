@@ -20934,6 +20934,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpforce: 100
   sfxJump: {fileID: 8300000, guid: 145f4e3cd1a1047ff97e5aa8db3a8ddc, type: 3}
+  sfxDeath: {fileID: 8300000, guid: 1f3910a94e24c407f8f2ff8a9dacf74a, type: 3}
 --- !u!54 &1764863879
 Rigidbody:
   m_ObjectHideFlags: 0
