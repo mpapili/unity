@@ -38,15 +38,17 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		//let's capture the input of a mouse-click or tap
-		if (Input.GetMouseButtonDown (0)) {		//"0" means left-click!
-			rigidBody.useGravity = true;	//turn on gravity after first click! :)
-			anim.Play("jump");	//will play the jump animation
-			jump = true;
+		if (!GameManager.instance.GameOver && GameManager.instance.GameStarted) {
+			//let's capture the input of a mouse-click or tap
+			if (Input.GetMouseButtonDown (0)) {		//"0" means left-click!
+				GameManager.instance.PlayerStartedGame();
+				rigidBody.useGravity = true;	//turn on gravity after first click! :)
+				anim.Play ("jump");	//will play the jump animation
+				jump = true;
+				//play ONCE the audio noise
+				audioSource.PlayOneShot (sfxJump);
+			}
 		}
-		//play ONCE the audio noise
-		audioSource.PlayOneShot (sfxJump);
-
 	}
 
 	//FixedUpdate > Update for rigidbodies
@@ -72,6 +74,7 @@ public class Player : MonoBehaviour {
 			rigidBody.AddForce (new Vector2 (80, 30), ForceMode.Impulse);	//apply some force to him
 			rigidBody.detectCollisions = false;		//pull physics away from him so he dies!
 			audioSource.PlayOneShot (sfxDeath);	//play the death sound
+			GameManager.instance.PlayerCollided();	//player colided set bool to true!
 		}
 
 

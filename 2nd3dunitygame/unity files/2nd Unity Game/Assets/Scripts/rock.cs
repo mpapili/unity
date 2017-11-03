@@ -15,7 +15,9 @@ public class rock : objectsScript {
 	}
 
 	protected override void Update(){
-		base.Update ();
+		if (GameManager.instance.PlayerActive) {
+			base.Update ();
+		}
 	}
 
 	//IEnumerator is an advanced C# topic (google it)
