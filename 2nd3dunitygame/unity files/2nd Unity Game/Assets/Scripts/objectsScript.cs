@@ -7,7 +7,7 @@ public class objectsScript : MonoBehaviour {
 	//Makes a private variable that the "inspector" in unity can see
 	[SerializeField] private float objectSpeed = 1;
 	[SerializeField] private float resetPosition = 98.4f;
-	[SerializeField] private float startPosition = -80.5f;
+	[SerializeField] public float startPosition = -80.5f;
 
 	// Use this for initialization
 	void Start () {
@@ -30,5 +30,10 @@ public class objectsScript : MonoBehaviour {
 
 			}
 		}
+	}
+
+	public void resetMe(){
+		Vector3 newPos = new Vector3 (startPosition, transform.position.y, transform.position.z);
+		transform.position = newPos;
 	}
 }

@@ -20,6 +20,10 @@ public class rock : objectsScript {
 		}
 	}
 
+	public void resetMe(){
+		base.resetMe ();
+	}
+
 	//IEnumerator is an advanced C# topic (google it)
 	//target will be the top or bottom!
 	IEnumerator Move(Vector3 target) {
