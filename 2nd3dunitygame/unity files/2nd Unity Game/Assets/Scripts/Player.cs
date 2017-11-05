@@ -14,6 +14,7 @@ public class Player : MonoBehaviour {
 	[SerializeField] private AudioClip sfxJump;	//going to be sound effect
 	private AudioSource audioSource;
 	[SerializeField] private AudioClip sfxDeath;	//sound upon death
+	[SerializeField] private AudioClip sfxCoin;	//coin
 
 	//built-in unity function - see unity docs
 	void Awake() {
@@ -75,6 +76,13 @@ public class Player : MonoBehaviour {
 			rigidBody.detectCollisions = false;		//pull physics away from him so he dies!
 			audioSource.PlayOneShot (sfxDeath);	//play the death sound
 			GameManager.instance.PlayerCollided();	//player colided set bool to true!
+		}
+		if (collision.gameObject.tag == "collectable") {
+			GameManager.instance.PlayerGotCoin ();
+			//collision.gameObject.SetActive (false);	//let's see if we can destroy the coin!
+			//collision.gameObject.transform.position = new Vector3 (collision.gameObject., transform.position.y, transform.position.z);
+			collision.gameObject.transform.position = new Vector3 (-80.5f, gameObject.transform.position.y, gameObject.transform.position.z);
+			audioSource.PlayOneShot (sfxCoin);
 		}
 
 

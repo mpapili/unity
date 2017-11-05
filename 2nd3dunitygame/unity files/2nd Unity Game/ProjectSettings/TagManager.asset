@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - obstacle
+  - collectable
   layers:
   - Default
   - TransparentFX

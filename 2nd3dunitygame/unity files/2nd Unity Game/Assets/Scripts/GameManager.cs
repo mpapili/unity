@@ -18,6 +18,9 @@ public class GameManager : MonoBehaviour {
 	//has the game started?
 	private bool gameStarted = false;
 
+	//my code starts here
+	private int score = 0;
+
 	void Awake() {
 		//make sure there's only one gamemanager object
 		if (instance == null) {
@@ -54,6 +57,12 @@ public class GameManager : MonoBehaviour {
 		gameOver = true;
 	}
 
+	//player got a coin
+	public void PlayerGotCoin() {
+		score += 1;
+		print(score);
+	}
+
 	//player started game
 	public void PlayerStartedGame() {
 		playerActive = true;
@@ -75,6 +84,10 @@ public class GameManager : MonoBehaviour {
 
 	public bool GameStarted {
 		get { return gameStarted; }
+	}
+
+	public int GetScore {
+		get { return score; }
 	}
 
 
