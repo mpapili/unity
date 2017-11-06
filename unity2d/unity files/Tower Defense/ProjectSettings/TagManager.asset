@@ -13,8 +13,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - CollisionLayer
+  - prettystuff
   - 
   - 
   - 
@@ -40,4 +40,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: New Layer
+    uniqueID: 184247649
+    locked: 0
+  - name: scenery
+    uniqueID: 1130562859
+    locked: 0
+  - name: moreInFront
+    uniqueID: 1122293693
     locked: 0
