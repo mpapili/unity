@@ -1,0 +1,109 @@
+**ANIMATING AND IMPORTING CHARACTER MODELS**
+	--> very important to know!
+	--> this course will use assets provided for the course by bitgem (we have a 15% coupon remember)
+
+Let's find our assets. We're going to use the "zombie"
+	--> we'll need the textures and animations.
+
+Create a folder under assets in your unity project, let's call it zombie.
+	--> drag the models and textures folder into that zombies folder
+		--> zombierushassets --> 3d --> zombie
+			--> this will take a few minutes. HAVING A GOOD SSD IS NECESSARY FOR THIS.
+
+check it out. you have two zombies. micro_zombie and micro_zombie_mobile. Not bad. Let's check it out.
+	--> model has basic information
+		--> rig has info for the skeletons and models
+			--> you should use BLENDER
+		--> animations
+			--> frames that have been set on the rig+mesh!
+
+**animating**
+	--> in animations (with your model selected) let's make an idle animation
+		--> start is gonna be "6" end is gonna be "65"
+			--> these are frames
+			--> check out the "animation list" for these
+				--> 395-399 (frames!)
+				--> animations lists are like movies. you can say when your animation starts and stops and name it 
+				--> notice that idle is 6 to 65
+				--> make a new one called "jump" 
+					--> in the list we see jump animation is from 395-399
+	--> you can play these animations in the preview
+	--> GET GOOD WITH RENDER
+
+
+Sweet we have two animations we can use. Let's save project, then drag and drop our mobile zombie onto the scene!
+	--> add him in and expand him in the heiarchy. oh cool his name is brian(?) REMEMBER THAT.
+		--> change his shader (oops you can't for some reason)
+			--> place him, rotate him, scale him.
+
+Play the game. Okay he's cool but WE NEED AN "ANIMATION CONTROLLER"
+
+MAKE A NEW FOLDER IN "ASSETS" called "animations"
+	--> create
+		--> animation controller
+			--> drag your new animation controller onto the animation controller component of the zombie object (woahh)
+			--> from the ".fbx" file it added the animation component for us because it detected that it was animated!
+
+
+DOUBLE-CLICK THE ANIMATION CONTROLLER TO OPEN THE ANIMATOR TAB (WHAT)
+	--> we have some layers but nothing else
+		--> we need to import the animation clips we made on our object earlier!
+
+	--> (hold down mouse wheel to move around here!)
+	--> we can access these settings we made earlier
+		--> assets, models, zombie (CLICK THE RIGHT ARROW TO EXPAND THE MICRO_ZOMBIE OBJECT)
+			--> woah! our clips are here!
+	
+			--> drag the idle clip into the animator window
+				--> entry will tie to the DEFAULT ANIMATION (idle)
+			--> "jump" will not be tied to anything at this time (fine)
+
+	--> when he jumps we want to make a TRANSITION FROM jump
+		--> right click "jump" and select "create transition"
+			--> drag it to "idle"
+				--> this means after jump it'll transition back into idle
+
+
+Time to make some JUMP CODEEEE!
+
+In the scripts folder make a "player" script!
+	--> name the zombie object "player"
+
+
+HERE'S THE CODE:
+
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Player : MonoBehaviour {
+
+	//create an animator object --> searches animator object 
+	Animator anim;
+
+	// Use this for initialization
+	void Start () {
+		//will search object script is assigned-to for an animator component (our zombie player has one!)
+		anim = GetComponent<Animator> ();
+
+	}
+	
+	// Update is called once per frame
+	void Update () {
+
+		//let's capture the input of a mouse-click or tap
+		if (Input.GetMouseButtonDown (0)) {		//"0" means left-click!
+			anim.Play("jump");	//will play the jump animation
+		}
+
+	}
+}
+
+
+
+Drag the script onto the PLAYER object (the highest one up, not "brian" or anything) and let it rip! IT WORKS!
+	--> a small side-course for animating skeletons in blender would be solid
+
+
+

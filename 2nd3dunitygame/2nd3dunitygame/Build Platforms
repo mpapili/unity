@@ -1,0 +1,48 @@
+**Build Platforms**
+	Right now we've been working entirely in PC/web format.
+		let's change it to be a MOBILE game!
+
+
+File --> build settings --> click iOS and click "open download page"
+	--> install from package that it downloads
+		--> it looks like ours might already be there! We have all packages except for some proprietary consoles (xbox, wii, etc)
+	--> let's start off on ios
+		--> if you work on windows you won't be able to export with xcode :-/ so start with android instead
+		--> select "android" and click "switch platform"
+			--> if you go down to your game you can now change your aspect ratio between several popular devices!
+			--> the switch itself will take a minute, changing some textures.
+
+In the fantasy demon cave folder let's find the bone bridge
+	--> place it dead-center (reset position to 0,0,0 and adjust accordingly for camera
+	--> change it around.
+	--> we're going to have the bridge "moving"
+		--> pull it so there's visible lava between it and the background
+
+Find in the assets folder "module platform" and put these on either side of the bridge
+	--> remember CTRL+D to replicate it for the other side!
+	--> next CTRL+D two more of these module platforms to the right side AND CTRL+D the bridge. You should have a nice long platform.
+
+COMBINING OBJECTS:
+	Combining objects COULD NOT BE EASIER
+		--> in the heiarchy create a blank GameObject
+			--> select all three and drag them from the heiarchy down so they're UNDER the new game object and voila!
+				--> name the game object "flat" or something.
+					--> do this on the three flat platforms next to each other
+		it works!
+
+	Rotate them as one object now (nice)
+		--> if the center isn't accurate, select the "center" button (in unity by the mode select) and manipulate it
+
+**SELF TAUGHT**
+PIVOT MANIPULATION
+	--> when rotating a combined object the "pivot" point or where the center is is sometimes not always where you want it to be
+	--> unity does not have a method of fixing this but there's an accepted workaround
+		--> create an empty gameobject and add it to the combined object
+			--> now move this as far away as necessary until the average center/pivot is where you want it!
+			--> crazy... but... it works!
+
+Recreate the "flat" combined object on the other side of the last bridge
+
+Now, create a final combined object with the FULL STRUCTURE WE JUST MADE (bridge and all platforms and flat) under it in heiarchy!
+	--> manipulate it all at once. Cool huh?
+		--> we just kind of created a full platform!
