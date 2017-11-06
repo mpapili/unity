@@ -1,0 +1,44 @@
+**sprites and grid-snapping part 2**
+This is a VERY LONG lecture.
+	--> he brigns up a very pretty and drawn-up map... we're going to somehow get here eventually i suppose but right now we jsut have a green grass texture
+
+delete grass to start making your path
+	--> literally carve it into your finished grass pallet and let's fill it with some patches of path from the ground tiles assets folders!
+
+drag them in. don't worry about being perfect!
+
+
+now, while we're doing this, notice that there's "layers" next to tabs in properties! let's add a collisionLayer. We'll be us ing this later. Everything in unity2d is layerbased!
+
+okay so we have a disgusting unclean path now. Let's get it to snap. Go to edit --> snap settings
+	--> select all of the ground tiles in the heiarchy and select "snap all axes"
+		--> OMG IT'S AMAZING
+	--> select all of the grass tiles and do the same
+		--> yooo
+
+Drag all of these into the path object and voila. Our world is basically done.
+
+Time to add in a few extras! Some scenery, trees, rocks, etc. Don't copy the instructor just do what you think looks nice. Avoid using the towers and knightposts in the assets folder as we'll be using those!
+	--> okay this is pretty nice.
+		--> select them all and over on the right side, see "sorting layer" ? make it -1
+			--> THEY VANISHED
+
+layers are priority over laying
+	--> the ground is 0 on default. that's fine. -1 means it's behidn it, 1 means it's in fron tof it!
+	--> "order in layer" is like a layer-in-layer
+		--> use the plus sign
+
+alright nice! Now our trees are a separate layer in front of our ground. Sweet!
+
+Now let's put "building tiles"
+	--> where will the player be allowed to place towers in this tower defense game? make an empty object called buildsites
+	delete grass where you want the build sites, place the patches of dirt for the build sites, then put them into your buildsites gameobject
+		--> now select all of them, edit --> snap settings --> snap all axes!
+
+pretty awesome! we've got ourselves a game map!
+
+Create a new gameobject called "extras" and have a blast.
+	--> add a castle towards the end
+		--> put your castle on a new layer and make sure it's in front of the trees for sorting layer! USE THE PLUS BUTTON NOT THE LAYER LIST UNDERNEATH
+
+NOTE: white line is the camera field (edge of the game in this case)
