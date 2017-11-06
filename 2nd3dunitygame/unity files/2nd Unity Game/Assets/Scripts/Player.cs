@@ -15,7 +15,8 @@ public class Player : MonoBehaviour {
 	private AudioSource audioSource;
 	[SerializeField] private AudioClip sfxDeath;	//sound upon death
 	[SerializeField] private AudioClip sfxCoin;	//coin
-
+	private Vector3 startingVector;
+	private bool playerAlive = true;
 	//built-in unity function - see unity docs
 	void Awake() {
 
@@ -34,6 +35,8 @@ public class Player : MonoBehaviour {
 		anim = GetComponent<Animator> ();
 		rigidBody = GetComponent<Rigidbody> ();	//will search for rigidbody component 
 		audioSource = GetComponent<AudioSource> ();	//will get audio source from audiosource component
+		startingVector = new Vector3 (transform.position.x, transform.position.y, transform.position.z);
+
 	}
 	
 	// Update is called once per frame
@@ -48,6 +51,13 @@ public class Player : MonoBehaviour {
 				jump = true;
 				//play ONCE the audio noise
 				audioSource.PlayOneShot (sfxJump);
+			}
+			if (!playerAlive) {
+				rigidBody.useGravity = false;	//turn off gravity again
+				transform.position = startingVector;
+				rigidBody.velocity = new Vector3 (0,0,0);
+				rigidBody.detectCollisions = true;	//turn physics BACK ON		
+				playerAlive = true;
 			}
 		}
 	}
@@ -64,7 +74,6 @@ public class Player : MonoBehaviour {
 			rigidBody.velocity = new Vector2 (0,0);
 			rigidBody.AddForce(new Vector2(0, jumpforce), ForceMode.Impulse);
 
-
 		}
 
 	}
@@ -76,6 +85,7 @@ public class Player : MonoBehaviour {
 			rigidBody.detectCollisions = false;		//pull physics away from him so he dies!
 			audioSource.PlayOneShot (sfxDeath);	//play the death sound
 			GameManager.instance.PlayerCollided();	//player colided set bool to true!
+			playerAlive = false;
 		}
 		if (collision.gameObject.tag == "collectable") {
 			GameManager.instance.PlayerGotCoin ();
