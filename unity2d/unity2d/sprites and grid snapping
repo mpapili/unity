@@ -1,0 +1,74 @@
+**Sprites and Grid Snapping**
+
+start a new unity project named TowerDefense and name it "2d" - keep unity analytics off
+
+We're going to download the new asset pack (woohoo!)
+
+over in the game scene change the aspet from free to 16:9, you should see it reflected there.
+	--> let's drag in the assets which you've already extracted cause you're awesome
+
+drag the models folder right into the assets folder (yay already named)
+
+we also have a plugins folder for visual studio (bleh) we're going to be using mono cause we're hardcore (we aren't)
+	--> notice loading this way wayyy faster for some reason. INTERESTING.
+
+we'll actually be turning all of these png's INTO an animation (what!)
+
+unity converts png to sprites in 2d mode right away which is perfect for us
+
+extras --> folder for a finishing details to decorate the level (some nice polishing to make it look more professional)
+
+GUI --> things like buttons, loading bars, elements, we'll get more into it later in the course.
+
+Towers --> several towers for your tower defense game
+	--> castles, etc
+
+make a new folder in assets called "sprites"
+
+drag the "Arrow" into sprites!
+continue dragging in these assets and folders and drag them all over (except for GUI) at the same time
+
+here the instructor sets up visual studio. We'll be using monospace.
+
+We need to make a new folder for "animations" 
+	- create controllers folder
+	- create animations folder
+
+We'll see how all of this works later on.
+
+Make a prefabs folder. Like the last project, prefabs are EXTREMELY useful. Always use them if you use an object more than once!
+
+Make a "scripts" folder for all of our code
+
+make a "scenes" folder for multiple levels (ooooh)
+	--> save your scene as "level1" (save scene as..)
+
+TIME TO GET GOING. Let's make a map first!
+
+create an empty gameobject called "map1"
+	--> this will be the world we create with all child sprites
+
+go to your ground sprites assets and drag some grass onto your map
+	--> woah it's huge!
+		--> scale globally with "pixels per unit"
+			--> we'll be using 300! Play around with other screens :)
+				--> change this setting ON THE ASSET ITSELF
+
+Shift-click all of them and make the global change (nice!)
+
+Create another empty object called "ground"
+
+try and add a second block... hmm... it doesn't snap? that'd be insane if we made a grid with no snap settings!
+
+snap settings are in your edit menu
+	edit --> snap settings
+		--> shrink it down to 0.85 (this will detect and snap edges for ours)
+
+
+NOW try moving your tiles while holding CTRL ... THEY SNAP!
+
+NICE! now try covering the whole ground in grass.
+	--> select multiple, ctrl+d , crtl+drag for snap
+		--> rinse and repeat :)
+
+head over to your game. looks perfect, we're good to go with unity2d in unity3d

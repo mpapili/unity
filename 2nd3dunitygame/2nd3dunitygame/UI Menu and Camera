@@ -1,0 +1,158 @@
+**Creating a UI and 2nd Camera**
+
+This one is extremely important! We're going to make a UI for the menu screen that will allow us to start the game AND we'll do it through using a SECOND CAMERA!
+	--> just scratching the surface
+
+We're going to use a second camera so let's put that in now.
+
+Let's make an empty parent object for everything going into the menu called "Main Menu" - will make life easier later
+	--> create a camera under it and remove the audio listener IMMEDIATLY
+		--> move it someplace cool like in front of that skull
+		--> let's create a copy zombie in front of said camera!
+			--> ctl+d the zombie player and move him to your camera scene
+
+DEPTH
+	--> basically camera priority. Change camera depth to change priority. We want our main menu camera to come up first. Try it out!
+		--> LOL he can still jump and affect physics etc. BUT good. this is what we want sort of
+
+USER INTERFACE
+	--> right click
+		--> ui
+			--> raw image
+				--> drag giant white thing to the screen
+
+
+Create a "textures" folder down in your assets!
+	--> drag in the textures given for the project! should be logos etc
+		--> in 2d textures
+			--> import doesn't take too too long
+		--> drag the logo texture onto your raw image in the canvas
+			--> it looks huge, don't worry, this is just how it's done
+				--> wow adjusting it was painful butttt... we made it
+
+You can set the intended width in unity on its own, it's not perfect, don't worry about it. You can obsess later on.
+	Click your anchors in the logo, play with those, and then mess with the position coordinates (for the CANVAS!)
+
+NOW for our play button! Create a new raw image
+	--> play button image
+		--> adjust on-canvas like we did for the other one anddd nice
+
+NOW it's time to actually get the play button to be what starts the game! TIME TO CODE!!!
+
+we'll need another getter and setter! likeee
+
+	public bool GameStarted {
+		get { return gameStarted; }
+	}
+
+	public void enterGame(){
+		gameStarted = true;
+	}
+
+
+with the variabels obviously
+
+with a serialized field for main menu, go to the main camera which has the game manager on it and assign it the whole main menu parent.
+
+NOW in our canvas we have to make play DO THAT
+	--> create a button compoonent for the menu raw image
+		--> in onClick drag the main camera down as we want to access its public functions. There are a lot for all components, but in GameManager (our script) we will be able to select enterGame()
+
+Save and run and... IT WORKS!
+
+Let's disable jumping while we're in the menu justttt because. Change that conditional over to:
+
+
+		if (!GameManager.instance.GameOver && GameManager.instance.GameStarted) {
+
+
+AMAZING.
+
+okay we didn't go into too much detail BUT we can create a main menu screen! ayy! That's awesome, it's done in the same scene! Here is the code for our gamemanager: notice the changes:
+
+
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Assertions;
+
+public class GameManager : MonoBehaviour {
+
+	//create gamemanager maned 'instance'
+	public static GameManager instance = null;
+
+	//we need to serialize the main menu gameobject!
+	[SerializeField] private GameObject mainMenu;
+
+	//has the player STARTED playing?
+	private bool playerActive = false;
+	//is the game over?
+	private bool gameOver = false;
+	//has the game started?
+	private bool gameStarted = false;
+
+	void Awake() {
+		//make sure there's only one gamemanager object
+		if (instance == null) {
+			//this means "ME" (this gamemanager script)
+			instance = this;
+		} else if (instance != this) {
+			//destroy second gamemanagers if one is created
+			Destroy (gameObject);
+		}
+
+		//allows this object to persist BETWEEN SCENES
+		DontDestroyOnLoad (gameObject);
+
+		Assert.IsNotNull (mainMenu);
+	}
+
+	// Use this for initialization
+	void Start () {
+		
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
+
+	//setters vs getters!
+
+
+	//setters!
+
+	//player has colided
+	public void PlayerCollided() {
+		gameOver = true;
+	}
+
+	//player started game
+	public void PlayerStartedGame() {
+		playerActive = true;
+	}
+	public void enterGame(){
+		gameStarted = true;
+		//DISABLE THE MAIN MENU WHEN GAME STARTS
+		mainMenu.SetActive (false);
+	}
+
+	//getters!
+	public bool PlayerActive {
+		get { return playerActive; }
+	}
+
+	public bool GameOver {
+		get { return gameOver; }
+	}
+
+	public bool GameStarted {
+		get { return gameStarted; }
+	}
+
+
+
+}
+
+

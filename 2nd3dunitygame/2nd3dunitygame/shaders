@@ -1,0 +1,33 @@
+**Shaders**
+We now want to get the lighting better set up AND the materials better set up
+
+So click a big object. You'll notice under components there is MESH RENDERER
+
+Shader Component:
+	--> shiny difuse shader made by default
+		--> let's play with these built-in shaders to see if we can make this look right
+			--> try unlit --> texture
+				--> adjust the directional lighting woah
+					--> object is immune to lighting!
+			--> there's "mobile" which is mobile-supported(?)
+			--> keep it unlit until you can figure out what you want to do with it
+			--> transparent difuse is sweet
+
+turn off the directional light now.
+	--> lava looks terrible! Let's make it unlit so that removing the directional light doesn't ruin it
+
+Change the background that the main camera sees:
+	--> main camera
+		--> camera component
+			--> background --> black
+
+Black isn't a great background though, let's make GIANT mountains
+	CMD+D on a mountain, drag it to the back, and make it huuuuge ("R" to scale)
+		do this on both sides
+			--> universal scale in scale mode is the yellow cube in the middle
+				--> scales all three directions equally, useful!
+
+This video we've changed shaders on individual materials
+	we've removed lighting which is what you NORMALLY WILL DO for hand-painted textures!
+		--> they often have their own shadows on them already
+		--> making things immune to the directional light keeps its original style

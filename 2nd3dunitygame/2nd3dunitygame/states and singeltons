@@ -1,0 +1,113 @@
+**GAME STATES AND SINGELTONS**
+
+Games have STATES. Menu, loading, game over, in-game, etc etc. There are always always always going to be states in games even in something as simple as flappy-bird clones.
+
+What states do we need in our game?
+	--> well we certainly should be adding a game-over state at this point
+
+When our game first loads we should have everything thereee but nothing moving right? It waits on some standby state until the player does their first tap!
+
+Let's create a game manager script!
+	--> assign it to something always there
+		--> like the main camera!
+
+Let's make a singelton instance.
+	--> when we have three rocks it's technically running THREE SCRIPTS at the same time. This isn't a good idea is it? We should be using singeltons. One script that can affect multiple objects. A SINGELTON!
+		--> our singelton can only have one instance and always exists in memory
+
+static means only one can exist and everyone will refer to that one
+
+REMEMBER defensive coding is how you win. Encapsulation is important. All of our gamemanager booleans and values should be private!
+	--> make private variables with PUBLIC functions that allow controlled manipulation! ALWAYS ALWAYS ALWAYS
+
+**IMPORTANT CONCEPT**
+	--> the player class should ONLY KNOW ABOUT THE PLAYER
+		--> shouldn't have to know how to end the game
+	--> rock should only know rocks
+	--> gameManager should handle EVERYTHING ELSE
+
+We're making setters and getters!
+
+Let's make it so that the objects only move if gameOver bool is false
+		if (!GameManager.instance.GameOver) {
+
+
+and do the same for the player jump inputs!
+
+NOW let's not let the rock object's "base.update()" function run unless:
+		if (GameManager.instance.PlayerActive) {
+
+	unless the player started the game! Awesome!
+
+So we've covered a lot, but given those conditionals above and the gamemanager code under this I really hope you can figure this out! It's extremely powerful and NECESSARY to make optimized code.
+
+
+HERE IS THE GAME MANAGER: EVERYTHING WAS CHANGED BUT ONLY SLIGHTLY:
+
+
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class GameManager : MonoBehaviour {
+
+	//create gamemanager maned 'instance'
+	public static GameManager instance = null;
+
+	//has the player STARTED playing?
+	private bool playerActive = false;
+	//is the game over?
+	private bool gameOver = false;
+
+	void Awake() {
+		//make sure there's only one gamemanager object
+		if (instance == null) {
+			//this means "ME" (this gamemanager script)
+			instance = this;
+		} else if (instance != this) {
+			//destroy second gamemanagers if one is created
+			Destroy (gameObject);
+		}
+
+		//allows this object to persist BETWEEN SCENES
+		DontDestroyOnLoad (gameObject);
+	}
+
+	// Use this for initialization
+	void Start () {
+		
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
+
+	//setters vs getters!
+
+
+	//setters!
+
+	//player has colided
+	public void PlayerCollided() {
+		gameOver = true;
+	}
+
+	//player started game
+	public void PlayerStartedGame() {
+		playerActive = true;
+	}
+
+
+	//getters!
+	public bool PlayerActive {
+		get { return playerActive; }
+	}
+
+	public bool GameOver {
+		get { return gameOver; }
+	}
+
+}
+

@@ -1,0 +1,19 @@
+**EXTENDING THIS GAME**
+
+a few things for a project!
+
+make sure the player dies if they hit the ground!
+
+create a game over screen!
+	- assets included
+
+Collect "coins" and a score!
+	--> coin texture is in there actually
+		--> "portal" texture
+		--> detect a colision, collect the coin
+
+
+the last thing? Let's slowly rotate those rocks so they look better!
+	--> you have everything! take your skils to the next level on your own
+
+
