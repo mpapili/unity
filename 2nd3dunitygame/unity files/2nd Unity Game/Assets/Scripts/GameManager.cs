@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
@@ -10,6 +11,7 @@ public class GameManager : MonoBehaviour {
 
 	//we need to serialize the main menu gameobject!
 	[SerializeField] private GameObject mainMenu;
+	[SerializeField] private GameObject replayButton;
 
 	//has the player STARTED playing?
 	private bool playerActive = false;
@@ -39,7 +41,7 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+		replayButton.SetActive (false);	//hide replay button!
 	}
 	
 	// Update is called once per frame
@@ -55,6 +57,7 @@ public class GameManager : MonoBehaviour {
 	//player has colided
 	public void PlayerCollided() {
 		gameOver = true;
+		replayButton.SetActive (true);
 	}
 
 	//player got a coin
@@ -73,10 +76,17 @@ public class GameManager : MonoBehaviour {
 		mainMenu.SetActive (false);
 	}
 
+	public void resetGame(){
+		gameOver = false;
+		playerActive = false;
+		replayButton.SetActive (false);
+	}
+
 	//getters!
 	public bool PlayerActive {
 		get { return playerActive; }
 	}
+		
 
 	public bool GameOver {
 		get { return gameOver; }
