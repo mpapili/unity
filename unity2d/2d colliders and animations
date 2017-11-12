@@ -1,0 +1,111 @@
+**Animations and 2d Colliders**
+
+So now we're finally going to be working with the 2d game objects, make them prefabs, and apply our animations to them. Prefabs should be a nice review.
+
+Let's create a new empty object named enemy1
+
+In our assets --> sprites folder let's see what animations we have under "enemy1"
+	--> open "walking" and highlight all of them
+		--> drag them over to our empty enemy1 gameobject
+			--> it'll prompt you to save your animation! Let's save it in one of our animation folders!
+			--> name it "walking"
+
+	--> how head over to where you saved it and LOOK. They're there! an animation and an animation controller!
+	--> repeat this for "hurt"
+		--> notice the controller only gets made once per object!
+			--> we only want one controller per object anyway
+				--> walking is set as the "Default" state
+					--> this is good
+
+	--> open the animation controller to take a look at these.
+	--> the orange one is the default state
+
+	--> do it again for "dying"
+		--> same folder... anddd save.
+
+Let's finally drag the player on the board!
+	--> we need a default sprite that shows up when code isn't running.
+		--> drag the idle_000 sprite into the "default sprite" field for the object you drag onto the screen
+			--> resize and move as-needed!
+	--> for all of the animation png's in the animation folders
+		--> resize them to 500 pixels by selecting all of them
+	--> okay that took a few minutes
+		--> UGH now we have to do that for enemy2
+		--> anddd enemy3
+			--> scaling sprite sizes is important and you will always have to do it
+
+NOW WE'RE READY TO PREFAB!
+	--> drag the object into your prefabs folder (that you make)
+
+	--> drag a prefab on there... LOOK AT HIM WALKING OMG.
+
+Create another empty object. This will become enemy2!
+	--> similar to before let's drag the animations onto the empty object and name them accordingly and then assign a default sprite
+		--> drag "walking" over first to make it default from the start :)
+		--> repeat with "hurt" and "dying", make sure to give them different names!
+	--> make it layer level "1" anddd play. LOOK! It's animated and moving! That's awesome!
+		--> save everything at this point.
+
+**USING THE SAME ANIMATION CONTROLLER FOR TWO OBJECTS**
+	--> let's go ahead an delete the enemy2 CONTROLLER
+		--> yes, just the controller.
+
+right-click on the enemy1 animator controller
+	--> create --> animator override controller
+		--> name it "enemy2"
+		--> drag enemy1 into it
+			--> change animations to the enemy2 versions in the properties panel and DONE
+
+NOW we're ready to make enemy2 a prefab!!!
+	--> actually, first drag the animator controller override over to enemy2
+		--> THEN make the prefab
+			--> save
+				--> run game...
+					--> DONE
+
+This is awesome. We're using one script for two animations. Now let's make enemy3. Create a new empty object named "enemy3"
+	--> create animations walking3, hurt3, dying3
+		--> set default sprite (set to layer1 also)
+			--> create animation controller override, delete original enemy3 animation controller
+			--> assign enemy1 as the controller in enemy3 properties
+			--> assign necessary animations hurt3, walking3, dying3 in properties
+			--> reassign new enemy3 controller to gameobject
+				--> SAVE AS PREFAB!
+
+IT'S WORKING three enemies off one controller and two overrides :)
+	--> we also have three completed prefabs. Nice!
+	--> remember, if you want to change a prefab you can do it for just one instance OR click "apply" and affect all the prefabs!
+
+Soon we'll be teaching them how to walk along the path.
+
+Let's go ahead and delete the enemies placed in the scene (keep the prefabs) and we're good to go!
+
+Let's create a spawn point for our enemies shall we?
+	--> creae empty object, call it "spawn", and color it "blue" by clicking on the CUBE in the inspector
+		--> this doesn't show up when you run the game! Nice and simple to use
+	--> tag it "respawn" (built-in)
+	--> do the same thing and create a RED reference to "exit" and put it towards the end of the path
+
+**WE NEED TO USE 2D COLLIDERS**
+	--> not like 3d colliders. They do not work together and will NOT react together.
+		--> we also don't use the Z-plane at all sooo...
+
+Select exit object and add a component
+	--> physics 2d
+		--> box collider!
+	--> "is triggered"
+		--> object won't HIT IT but will TRIGGER an event still (think collecting a coin)
+		--> we obviously want this for "exit" so select it
+
+Awesome! Let's save "exit" as a prefab.
+
+Time to make checkpoints to direct our characters!
+	--> create a parent empty object "checkpoints"
+		--> create checkpoint1 and create a tag called "checkpoint"
+			--> add a physics2d object 2d box collider component and check is-trigger
+
+Make checkpoint1 a prefab!
+	--> from your prefab you made, make a new one at the next corner. Copy and paste all of the checkpoints along the path everytime an enemy would need to TURN.
+
+
+
