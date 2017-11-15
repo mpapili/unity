@@ -1,0 +1,162 @@
+**Game Manager Singelton and Spawning Objects**
+
+let's add a rigidbody and box collider to our prefabs!
+	--> in physics 2d --> add a rigidbody 2d
+		--> select "is kinematic" (some versions have body-type set to kinematic!)
+			--> rigidbody will NOT react physics-wise but SOMETIMES needs physics. We'll want this selected for sure.
+			--> gravity will not affect our character by default, otherwise it would fall off the screen immediatly (yes, even in 2d!)
+				--> test it out for yourself
+
+Okay before we save the prefab, add a box collider from physics 2d
+	--> add it and similar to our last 3d game, adjust the box as good as you can get it. Default is garbage.
+		--> we are NOT doing "is triggered" for this!
+			--> objects on his layer would affect him otherwise!
+
+Now let's create a new tag "enemy"
+	--> tag your to-be-prefab guy as "enemy". We'll be needing this later.
+		--> add it to the collision layer!!!
+			--> do this for ALL enemy prefabs!
+
+now things that these guys need to collide with (think checkpoints) will need to be on the same layer! (collision layer) so make sure the checkpoints are all on this layer too as well as the other enemies.
+
+Hit "apply now" and we'll see these changes go to the prefab.
+
+**COPYING/PASTING COMPONENTS** (amazing)
+	--> click the gear next to your rigidbody
+		--> copy component
+		--> PASTE component into the other enemies at the top (click the gear by "transform")
+			--> WHATTT we only needed to make one rigidbody and collider for enemy1 enemy2 and enemy3 !!!
+	--> HUGELY useful
+
+Now everything is set up and we are FINALLY ready to write some code!
+
+Make an empty object called "gamemanager" (we won't be using main camera like before!)
+	--> create a component for a script; drag the created script from assets over to the scripts folder
+
+TIP --> the "lock" icon will lock a properties window EVEN IF YOU'RE CLICKING AROUND THE SCREEN!
+
+
+Let's write our basic controllers:
+
+	public GameObject spawnPoint;
+	public GameObject[] enemies; //a public array for enemies
+
+
+	//let's make some controls
+	public int maxEnemiesObScreen; //limit enemies to be spawned
+	public int totalEnemies; //how many are on the screen at the time
+	public int enemiesPerSpawn; //how many at a time? More control
+
+	private int enemiesOnScreen = 0;
+
+
+and over in unity let's drag in our spawn gameobject to the spawnPoint of our game manager. Nice.
+	--> ACTUALLY save "spawn" as a prefab and drag the PREFAB over. Using the spawn from the heiarchy creates problems!
+
+now for that array let's drag over our prefabs enemy1-3 over to our array which we'll set to size 3
+
+Create a "loader" C# script and connect it to your main camera. We will load our game manager object here.
+
+	public GameObject gameManager;
+
+	//called once when game is loaded
+	void Awake () {
+		// if gamemanager wasn't create, create the singelton
+		if (GameManager.instance == null) {
+			Instantiate (gameManager);
+		}
+
+
+	--> save your gameManager object to prefabs
+		--> click on the camera; where you have Game Manager drag your gameManager script prefab over into it and save. Nice.
+
+When we run this, main camera will call loader which will create one instance of gameManager!!!
+
+
+IT WORKS! We spawned an enemy at the spawn point. Code is under:
+
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class GameManager : MonoBehaviour {
+
+
+	public static GameManager instance = null;	//one single instance
+
+	//let's create a public spawn point! (can change as game is running)
+	public GameObject spawnPoint;
+	public GameObject[] enemies; //a public array for enemies
+
+
+	//let's make some controls
+	public int maxEnemiesObScreen; //limit enemies to be spawned
+	public int totalEnemies; //how many are on the screen at the time
+	public int enemiesPerSpawn; //how many at a time? More control
+
+	private int enemiesOnScreen = 0;
+
+	void Awake() {
+			//check if instance of gameManager is null, if it is, set it equal to itself
+		if (instance == null) {
+			instance = this;
+		}
+			//destroy it if there's another one!
+		else if (instance != this) {
+			Destroy(gameObject);
+		}
+
+		DontDestroyOnLoad (gameObject);
+		print ("created gameManager instance");
+	}
+
+	void spawnEnemy(){
+		print ("ruinning spawnEnemy");
+		if (enemiesPerSpawn > 0 && enemiesOnScreen < totalEnemies) {
+			print ("spawning enemies");
+			for (int i = 0; i < enemiesPerSpawn; i++) {
+				if (enemiesOnScreen < maxEnemiesObScreen) {
+					//create enemy and cast as GameObject
+					GameObject newEnemy = Instantiate (enemies [0]) as GameObject;
+					//move created enemy to spawnPoint right away
+					newEnemy.transform.position = spawnPoint.transform.position;
+					enemiesOnScreen += 1;	//increment private counter
+				}
+			}
+		}
+	}
+
+	void Start () {
+		spawnEnemy ();
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
+}
+
+
+
+andddd for the loader!
+
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class loader : MonoBehaviour {
+
+	public GameObject gameManager;
+
+	//called once when game is loaded
+	void Awake () {
+		// if gamemanager wasn't create, create the singelton
+		if (GameManager.instance == null) {
+			Instantiate (gameManager);
+		}
+	}
+
+}
+
