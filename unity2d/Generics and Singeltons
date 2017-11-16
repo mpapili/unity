@@ -1,0 +1,100 @@
+**GENERICS AND SINGELTONS**
+
+this is applicable to C# in-general!
+
+So last time we learned how to spawn our enemies. We were going to go into building towers but remember how we created a loader class where we load our singeltons? There's a problem. When you make your tower manager the instance will not be created properly.
+	--> to fix this let's talk about GENERICS
+		--> all of our singeltons will be onto the camera
+			--> we can fix this by making a singelton generic class!
+
+If we made a really simple method and passed in a string. It works easy enough.
+	--> what if we wanted to pass an integer in? nope. Gotta make a new function.
+	--> what about a float? nope. gotta make a new function
+		--> see the problem? Generics are one function that you can pass ANYTHING into. So how could we rewrite something?
+		instead of:
+		void printString(string value){ }
+		void printInt(int value) { }
+		you can do....
+		void printAny<T> (T value) { }
+			--> to call it you'd say:
+			    printAny<string>("THIS IS AWESOME");
+			    //or
+			    printAny<int>(5);
+
+
+check this out:
+
+
+//make a "dictionary" (python-esque)
+public class KeyValuePair<Tkey, Tvalue> {
+
+	public Tkey key;	//the key value becomes whatever was passed into tkey
+	public Tvalue value;	//the value becomes whatever was passed in as tvalue
+
+	//initializer!
+	public KeyValuePair(Tkey _key, Tvalue _value){
+		key = _key;
+		value = _value;
+	}
+
+	public void Print(){
+		Debug.Log ("Key: " + key.ToString ());
+		Debug.Log ("Value: " + value);
+	}
+
+}
+
+
+and you can create a keyvaluepair object now with:
+KeyValuePair<int, string> course = new KeyValuePair<int, string> (1, "Devslopes");
+and call print with:
+course.Print();
+
+Time to get rid of our loader script and the component on the camera (yes, seriously!)
+
+Create a new C# script for the main camera called "Singelton"
+
+
+Delete your instance creation (awake) function in the GameManager.
+
+HERE IS THE SINGETLON CLASS C# SCRIPT:
+
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+//creating a generic singelton class
+public class Singelton<T> : MonoBehaviour where T: MonoBehaviour {
+
+	private static T instance;	//one single instance
+
+	//capital "I" this time! This is our public getter!
+	public static T Instance {
+		get {
+				//check if instance of gameManager is null, if it is, set it equal to itself
+			if (instance == null) {
+				//find any class name named "T" (gameManager for example)
+				instance = FindObjectOfType<T>();
+			}
+				//destroy it if there's another one!
+			else if (instance != FindObjectOfType<T>()) {
+				Destroy(FindObjectOfType<T>());
+			}
+
+			DontDestroyOnLoad (FindObjectOfType<T>());
+			print ("created gameManager instance");
+			return instance;
+		}
+	}
+
+}
+
+
+
+And change the top of GameManager to:
+
+public class GameManager : Singelton<GameManager> {
+
+which will inherit everything from that singelton class so we never need to write it again!
+	--> Attach GameManager to the main camera and voila! We've done it!

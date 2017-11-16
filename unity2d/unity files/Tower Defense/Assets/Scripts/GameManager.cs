@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour {
-
-
-	public static GameManager instance = null;	//one single instance
+public class GameManager : Singelton<GameManager> {
 
 	//let's create a public spawn point! (can change as game is running)
 	public GameObject spawnPoint;
@@ -20,24 +17,9 @@ public class GameManager : MonoBehaviour {
 	private int enemiesOnScreen = 0;
 	const float spawnDelay = 0.5f;	//delay between spawns!
 
-	void Awake() {
-			//check if instance of gameManager is null, if it is, set it equal to itself
-		if (instance == null) {
-			instance = this;
-		}
-			//destroy it if there's another one!
-		else if (instance != this) {
-			Destroy(gameObject);
-		}
-
-		DontDestroyOnLoad (gameObject);
-		print ("created gameManager instance");
-	}
 
 	IEnumerator spawn(){
-		print ("ruinning spawnEnemy");
 		if (enemiesPerSpawn > 0 && enemiesOnScreen < totalEnemies) {
-			print ("spawning enemies");
 			for (int i = 0; i < enemiesPerSpawn; i++) {
 				if (enemiesOnScreen < maxEnemiesObScreen) {
 					//create enemy and cast as GameObject
