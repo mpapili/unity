@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 95228235611236514}
   - component: {fileID: 61511145221882286}
   - component: {fileID: 50123198363073018}
+  - component: {fileID: 114052577672930232}
   m_Layer: 8
   m_Name: Enemy3
   m_TagString: Enemy
@@ -105,6 +106,28 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114052577672930232
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1609590836094978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd881853131564e3cacee3df9e572922, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: 0
+  exitPoint: {fileID: 4489871809913656, guid: 0b26124f4604a4b24a44e5798fbb2411, type: 2}
+  wayPoints:
+  - {fileID: 4658105868607638, guid: 80e324a58d4464be3b51fa668a0ee2ca, type: 2}
+  - {fileID: 4075725025968420, guid: 80e324a58d4464be3b51fa668a0ee2ca, type: 2}
+  - {fileID: 4608809225461830, guid: 80e324a58d4464be3b51fa668a0ee2ca, type: 2}
+  - {fileID: 4615084569734802, guid: 80e324a58d4464be3b51fa668a0ee2ca, type: 2}
+  - {fileID: 4060657244455110, guid: 80e324a58d4464be3b51fa668a0ee2ca, type: 2}
+  - {fileID: 4816473962344326, guid: 80e324a58d4464be3b51fa668a0ee2ca, type: 2}
+  - {fileID: 4106792535255280, guid: 80e324a58d4464be3b51fa668a0ee2ca, type: 2}
+  navigationUpdate: 0.01
 --- !u!212 &212525556620634380
 SpriteRenderer:
   m_ObjectHideFlags: 1

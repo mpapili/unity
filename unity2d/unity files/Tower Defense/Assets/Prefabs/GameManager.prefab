@@ -58,4 +58,4 @@ MonoBehaviour:
   - {fileID: 1609590836094978, guid: f6130397de1e44666b1fd115b0333e08, type: 2}
   maxEnemiesObScreen: 8
   totalEnemies: 12
-  enemiesPerSpawn: 2
+  enemiesPerSpawn: 1
