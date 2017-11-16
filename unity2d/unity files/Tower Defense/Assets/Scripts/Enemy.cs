@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour {
 			//if we hit the end, DESTROY me!
 			Destroy (gameObject);
 			//tell game manager to reduce our count of enemies on screen!
-			GameManager.instance.removeEnemyFromScreen();
+			GameManager.Instance.removeEnemyFromScreen();
 		}
 	}
 
