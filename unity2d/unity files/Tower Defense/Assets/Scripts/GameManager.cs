@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour {
 	public int enemiesPerSpawn; //how many at a time? More control
 
 	private int enemiesOnScreen = 0;
+	const float spawnDelay = 0.5f;	//delay between spawns!
 
 	void Awake() {
 			//check if instance of gameManager is null, if it is, set it equal to itself
@@ -33,7 +34,7 @@ public class GameManager : MonoBehaviour {
 		print ("created gameManager instance");
 	}
 
-	void spawnEnemy(){
+	IEnumerator spawn(){
 		print ("ruinning spawnEnemy");
 		if (enemiesPerSpawn > 0 && enemiesOnScreen < totalEnemies) {
 			print ("spawning enemies");
@@ -47,10 +48,21 @@ public class GameManager : MonoBehaviour {
 				}
 			}
 		}
+		yield return new WaitForSeconds (spawnDelay);
+		StartCoroutine (spawn ());
+	}
+
+
+	public void removeEnemyFromScreen(){
+
+		if (enemiesOnScreen > 0) {
+			enemiesOnScreen -= 1;
+		}
+
 	}
 
 	void Start () {
-		spawnEnemy ();
+		StartCoroutine (spawn ());
 	}
 	
 	// Update is called once per frame

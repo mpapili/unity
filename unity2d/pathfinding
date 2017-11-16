@@ -1,0 +1,21 @@
+**Enemy Pathfinding in Unity**
+We were working on our game manager code. We've spawned an enemy but we have to attach a script to our enemy prefabs!
+	--> we can actually knock out all three at once!
+
+select enemy1, add a script named enemy
+	--> move from main asset folder into scripts folder
+	--> open visual studio (or monodevelop)
+
+Now, code for the logic will be at the bottom but we have to mind our tags! Also, save your checkpoints array AS A PREFAB because we'll need to assign them all to an array as our enemies move through them.
+
+IT WORKS. The little enemy moves through the path and then dies at the finish!
+
+Now let's spawn the enemies from within the gameManager using an IEnumerator* (amazing)
+	--> play with spawning via update. It spawns the enemy limit! buttt it's clunky.
+		--> IEnumerator is a coroutine
+			--> coroutines have built-in wait functions which is great for unity and C# in-general
+			--> have it call itself at the end (over and over) with a return yield statement and call it once initially from start to set the coroutine in motion!
+
+IT WORKS in the game we're spawning waves of enemies slowly every half-second! Code will be underneath.
+
+Be sure to copy and paste the script components to enemy2 and enemy3!
