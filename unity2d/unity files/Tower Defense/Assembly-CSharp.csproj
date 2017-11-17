@@ -54,6 +54,8 @@
      <Compile Include="Assets\Scripts\Enemy.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\Singelton.cs" />
+     <Compile Include="Assets\Scripts\Tower\TowerBtn.cs" />
+     <Compile Include="Assets\Scripts\Tower\TowerManager.cs" />
  <Reference Include="Facebook.Unity.Settings">
  <HintPath>/home/map/Downloads/git/unity/unity2d/unity files/Tower Defense/Library/FacebookSDK/Facebook.Unity.Settings.dll</HintPath>
  </Reference>

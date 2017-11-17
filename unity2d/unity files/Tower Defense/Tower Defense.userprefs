@@ -1,10 +1,12 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Singelton.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GameManager.cs">
     <Files>
       <File FileName="Assets/Scripts/GameManager.cs" Line="19" Column="2" />
       <File FileName="Assets/Scripts/Enemy.cs" Line="10" Column="35" />
       <File FileName="Assets/Scripts/Singelton.cs" Line="14" Column="27" />
+      <File FileName="Assets/Scripts/Tower/TowerBtn.cs" Line="8" Column="38" />
+      <File FileName="Assets/Scripts/Tower/TowerManager.cs" Line="25" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
