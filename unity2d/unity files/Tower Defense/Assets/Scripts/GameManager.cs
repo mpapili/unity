@@ -5,14 +5,14 @@ using UnityEngine;
 public class GameManager : Singelton<GameManager> {
 
 	//let's create a public spawn point! (can change as game is running)
-	public GameObject spawnPoint;
-	public GameObject[] enemies; //a public array for enemies
+	[SerializeField] private GameObject spawnPoint;
+	[SerializeField] private GameObject[] enemies; //a public array for enemies
 
 
 	//let's make some controls
-	public int maxEnemiesObScreen; //limit enemies to be spawned
-	public int totalEnemies; //how many are on the screen at the time
-	public int enemiesPerSpawn; //how many at a time? More control
+	[SerializeField] private int maxEnemiesObScreen; //limit enemies to be spawned
+	[SerializeField] private int totalEnemies; //how many are on the screen at the time
+	[SerializeField] private int enemiesPerSpawn; //how many at a time? More control
 
 	private int enemiesOnScreen = 0;
 	const float spawnDelay = 0.5f;	//delay between spawns!

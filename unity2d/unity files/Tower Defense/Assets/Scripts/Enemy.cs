@@ -5,9 +5,9 @@ using UnityEngine;
 public class Enemy : MonoBehaviour {
 
 	public int target = 0;	//will be checkpoint array index!
-	public Transform exitPoint;	//transform is a location on the 2d map
-	public Transform[] wayPoints; //array of transforms
-	public float navigationUpdate;	//compared to delta-time for different speed computers
+	[SerializeField] private Transform exitPoint;	//transform is a location on the 2d map
+	[SerializeField] private Transform[] wayPoints; //array of transforms
+	[SerializeField] private float navigationUpdate;	//compared to delta-time for different speed computers
 
 	private Transform enemy;
 	private float navigationTime = 0;

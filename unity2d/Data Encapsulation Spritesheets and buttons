@@ -1,0 +1,142 @@
+**DATA ENCAPSULATION, SPRITESHEETS, AND BUTTONS**
+So first let's make all of our public variables in gameManager private. We only had them public so that we could play with them in the editor.
+	--> one thing that you can do is SERIALIZE it
+		--> remember [SerializeField] ? It lets the unity inspector poke at it butttt other classes CANNOT.
+
+Do that! (done)
+	--> everything is working fine and now our other classes can't get to them. DO THIS FOR EVERYTHING.
+
+Serialize the other stuff in enemy.cs as well before moving onwards. They were only public for the same reason as the above and it's dangerous to not encapsulate that data.
+
+Done? Cool. NOW let's make a sprites folder.
+	--> take the full sprites folder from the assets you downloaded for "GUI" and drag that into your sprites folder in assets
+		--> all png's will be converted into sprites for us upon import. Nice. Takes just a minute.
+
+**SPRITESHEETS**
+	--> click the folder and highlight "elements"
+		--> set it from single to multiple before continuing in the inspector
+		--> you can drag and select sprites from these sheets and NAME them. It'll pull the box closer. so nowww if you click "apply" on the sprite you selected after naming it it'll CREATE A SPRITE IN OUR SPRITES FOLDER
+			--> this is ripping sprites off of spritesheets!
+	--> before you hit "apply" be sure to click "trim" as well :)
+	--> these sprites are seen by expanding the "elements" sprite scene!
+
+BUTTON TIME.
+Create
+	--> UI
+		--> button
+
+A giant canvas is made. You build the UI in a MASSIVE fashion. Don't worry about it being weird, it scales to the resolution of your game properly.
+	--> first thing's first. We need three buttons.
+		--> add an image and delete the script component
+			--> remove the image component as well for the clear frame!
+
+Name this image "towerPanel"
+	--> add a grid component to it. Use this to arrange THREE identical buttons (you can copy the first one with CTRL+D)
+		--> delete the text of all three buttons from the heiarchy.
+
+	--> name the buttons based on the towers.
+	--> drag the sprites to the buttons component named "image source" to change it from the default button sprite to the sprites for the towers
+
+
+Now let's go into our scripts!
+	--> make a folder in scripts called "tower"
+		--> make a script called TowerBtn
+
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+//clicking the buttons will return tower objects
+public class TowerBtn : MonoBehaviour {
+
+	//we just need a gameobject to start
+	[SerializeField]
+	private GameObject towerObject;
+
+	//NOTICE THE CASES
+	public GameObject TowerObject{
+		get{
+			return towerObject;
+		}
+	}
+
+}
+
+
+
+highlight all of your buttons and drag this script onto them. They're all looking for a tower object!
+	--> we need to create our tower prefabs finally!
+
+Create a new folder called "towers" in prefabs and make one for "enemies" to clean things up a bit
+
+Drag your "tower front" objects to the scene starting with the archer tower front from sprites. We'll be making this into a prefab soon.
+	--> adjust the pixels a little bit. If you want to scale evenly select all the "tower front" sprites and you can adjust the "pixels per unit" section.
+		--> you don't have to change this but can if you want to
+
+Now drag the towers onto the script components that we attached to the buttons with a serializefield looking for a gameobject!
+
+Now make a prefab for all of our buttons
+
+Time to create a TowerManager now! Create a came object named TowerManager
+	--> make a singelton towermanager!
+
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class TowerManager : Singelton<TowerManager> {
+
+	//some unity-stuff!
+	private TowerBtn towerBtnPressed;
+
+	void Start () {
+	}
+
+	void Update () {
+	}
+
+	//set selected tower to be whichever tower button was pressed
+	public void selectedTower(TowerBtn towerSelected){
+
+		towerBtnPressed = towerSelected;
+		Debug.Log ("Pressed: " + towerSelected);
+
+	}
+
+}
+
+
+Assign it to gamemanager object then make the obejct a prefab THEN make the prefab a child of main camera!
+
+Okay now to set up the buttons! Select a button
+	--> onClick
+		--> add and drag towerManager from the heiarchy over into it
+			--> function is selectedTower()
+				--> ANOTHER argument will show up
+				--> we have to tell it what object we want there!
+					--> select the tower relevant to the button (just select the "circle" and it'll open prefabs :) )
+	--> do this for all three buttons
+
+
+run the code and voila! clicking the buttons actually makes a debug message saying which tower we've selected!
+
+Okay this lesson was pretty tough but let's go over the key things so we GET BETTER.
+
+Our tower manager was a singelton because of:
+	public class TowerManager : Singelton<TowerManager> {
+we always do this when we want ONE of something. Game managers and other managers are good examples for singeltons.
+
+We created our towerbutton script but never assigned it to anything. Why? Because in the tower manager we have:
+
+	private TowerBtn towerBtnPressed;
+
+and a function that starts with:
+
+	public void selectedTower(TowerBtn towerSelected){
+
+so our tower button variable in the game manager which doesn't die BECOMES the object that is assigned to the button (which is done in on-click in the unity-editor.
+
+It's crazy... but it works.
+
