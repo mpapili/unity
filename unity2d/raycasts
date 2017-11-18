@@ -1,0 +1,80 @@
+**Raycasts, tags, and placing the towers**
+So we can changed the selectedTower gameobject and we want to be able to CLICK on the game scene and create a tower there!
+
+open up tower manager
+
+we need to know when the mouse clicks, where it clicks, and know exactly where to place our tower objects. We'll be using RAYCASTS for this.
+
+RAYCAST --> variable where you can find where you clicked. Closest build-tile that you can place the object on
+		--> an invisible line from where you click shooting to the scene and will tell you as soon as it intersects with something
+			--> pretend clicking or touching creates an invisible line that shoots into the scene
+
+
+	public void placeTower(RaycastHit2D hit) {
+		//create the tower
+		GameObject newTower = Instantiate(towerBtnPressed.TowerObject);
+		//set newTower transform position to equal the raycast's transform position
+		newTower.transform.position = hit.transform.position;
+	}
+
+
+and
+
+
+	void Update () {
+		// "0" is left "1" is right
+		if (Input.GetMouseButton (0)) {
+			//get world point from PERSPECTIVE of the camera!
+			Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			//notice Input.mousePosition!
+			RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
+
+			placeTower (hit);
+		}
+	}
+
+
+uh oh! for raycasts the buttons are above EVERYTHING.
+	--> using UnityEngine.EventSystems;
+			// UI isn't a game object
+		if (!EventSystem.current.IsPointerOverGameObject () && towerBtnPressed != null) {
+
+
+uh oh again! We can spawn towers buttt there's no game object collider to hit on the ground!
+
+
+We'll need to do some tagging right now to test colliders!
+We need box colliders on ground, path, buildsites!
+	--> select all ground objects and add an is triggerd boxcollider2d with it
+		--> do the same for buildsites
+Tag time!
+	--> add a buildSite tag!
+	--> add a ground tag!
+	--> add a tower tag!
+		--> tag everything accordingly!
+
+OMG we can place towers!
+	--> let's make sure that you're not hitting a tower or non-build site!
+				if (hit.collider.tag == "buildsite") {
+
+easy.
+done.
+
+but now we have bad pivots(?) and can place towers on top of towers! (oh no)
+
+select the "front" sprites under towers in assssets
+	--> pivot is on center
+		--> mess around until you're happy. He uses
+			X = 0.26
+			Y = 0.5
+				--> looks bad, we'll keep it at "center" for our sprites! good to know though!
+				--> hmm actually no let's see
+					--> castle tower is awful
+						--> i like pivot 0.5, 0.25 !
+				--> hit apply to apply to the prefabs
+					--> actually same for the archer tower! Change that Y-pivot a bit!
+					--> castle tower is already perfect
+
+good video! Next up will be projectiles and gamey elements!
+
+
