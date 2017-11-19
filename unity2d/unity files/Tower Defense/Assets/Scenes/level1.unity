@@ -2430,7 +2430,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 99293023}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 427, y: 240, z: 0}
+  m_LocalPosition: {x: 427.5, y: 240, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1474812913}
@@ -2645,12 +2645,6 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224173538055755278, guid: 0b20a118515804d3c8b2f6359c36b803,
     type: 2}
   m_PrefabInternal: {fileID: 1183686039}
---- !u!114 &111741989 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114936704147289708, guid: 0b20a118515804d3c8b2f6359c36b803,
-    type: 2}
-  m_PrefabInternal: {fileID: 1183686039}
-  m_Script: {fileID: 11500000, guid: 58c4080fe64bd4d17853eabdc1143386, type: 3}
 --- !u!1 &112751542
 GameObject:
   m_ObjectHideFlags: 0
@@ -4305,7 +4299,7 @@ GameObject:
   - component: {fileID: 192616723}
   m_Layer: 0
   m_Name: HGround (8)
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4874,7 +4868,7 @@ GameObject:
   - component: {fileID: 212362301}
   m_Layer: 0
   m_Name: HGround (12)
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5047,7 +5041,7 @@ GameObject:
   - component: {fileID: 221441388}
   m_Layer: 0
   m_Name: HGround (4)
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5493,7 +5487,7 @@ GameObject:
   - component: {fileID: 245051767}
   m_Layer: 0
   m_Name: DLGround
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5765,7 +5759,7 @@ GameObject:
   - component: {fileID: 258184737}
   m_Layer: 0
   m_Name: HGround (14)
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7467,7 +7461,7 @@ GameObject:
   - component: {fileID: 365081102}
   m_Layer: 0
   m_Name: VGround (2)
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7541,7 +7535,7 @@ GameObject:
   - component: {fileID: 367309369}
   m_Layer: 0
   m_Name: VGround (3)
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7886,7 +7880,7 @@ GameObject:
   - component: {fileID: 392698679}
   m_Layer: 0
   m_Name: HGround (7)
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8711,7 +8705,7 @@ GameObject:
   - component: {fileID: 454546628}
   m_Layer: 0
   m_Name: VGround (8)
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10827,7 +10821,7 @@ GameObject:
   - component: {fileID: 588781116}
   m_Layer: 0
   m_Name: DLGround (2)
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11923,7 +11917,7 @@ GameObject:
   - component: {fileID: 665652882}
   m_Layer: 0
   m_Name: HGround (6)
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13262,7 +13256,7 @@ GameObject:
   - component: {fileID: 737432867}
   m_Layer: 0
   m_Name: HGround (1)
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13912,7 +13906,7 @@ GameObject:
   - component: {fileID: 803712747}
   m_Layer: 0
   m_Name: VGround (1)
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16959,7 +16953,7 @@ GameObject:
   - component: {fileID: 948015825}
   m_Layer: 0
   m_Name: VGround (9)
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17603,7 +17597,7 @@ GameObject:
   - component: {fileID: 972435017}
   m_Layer: 0
   m_Name: HGround
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17849,7 +17843,7 @@ GameObject:
   - component: {fileID: 979464372}
   m_Layer: 0
   m_Name: HGround (2)
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18121,7 +18115,7 @@ GameObject:
   - component: {fileID: 984870697}
   m_Layer: 0
   m_Name: URGround
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19213,7 +19207,7 @@ GameObject:
   - component: {fileID: 1047248419}
   m_Layer: 0
   m_Name: HGround (9)
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19631,7 +19625,7 @@ GameObject:
   - component: {fileID: 1070475989}
   m_Layer: 0
   m_Name: VGround
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -20100,7 +20094,7 @@ GameObject:
   - component: {fileID: 1099404162}
   m_Layer: 0
   m_Name: HGround (10)
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21037,11 +21031,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1474812913}
     m_Modifications:
-    - target: {fileID: 114573901943035458, guid: 21993395333334f3a89085774430634d,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 224685109329059332, guid: 21993395333334f3a89085774430634d,
         type: 2}
       propertyPath: m_LocalPosition.x
@@ -21132,40 +21121,15 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 1040275721053078, guid: 21993395333334f3a89085774430634d, type: 2}
-      propertyPath: m_Name
-      value: rock tower
-      objectReference: {fileID: 0}
-    - target: {fileID: 114573901943035458, guid: 21993395333334f3a89085774430634d,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114573901943035458, guid: 21993395333334f3a89085774430634d,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 114573901943035458, guid: 21993395333334f3a89085774430634d,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1905111530}
-    - target: {fileID: 114573901943035458, guid: 21993395333334f3a89085774430634d,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: selectedTower
+    - target: {fileID: 1040275721053078, guid: 21993395333334f3a89085774430634d, type: 2}
+      propertyPath: m_Name
+      value: rock tower
       objectReference: {fileID: 0}
-    - target: {fileID: 114573901943035458, guid: 21993395333334f3a89085774430634d,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: TowerBtn, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 114573901943035458, guid: 21993395333334f3a89085774430634d,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
-      value: 
-      objectReference: {fileID: 1890385684}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 21993395333334f3a89085774430634d, type: 2}
   m_IsPrefabParent: 0
@@ -22136,11 +22100,6 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1905111530}
-    - target: {fileID: 114221546979295496, guid: 0b20a118515804d3c8b2f6359c36b803,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
-      value: 
-      objectReference: {fileID: 111741989}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0b20a118515804d3c8b2f6359c36b803, type: 2}
   m_IsPrefabParent: 0
@@ -22452,7 +22411,7 @@ GameObject:
   - component: {fileID: 1207629931}
   m_Layer: 0
   m_Name: HGround (3)
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23636,7 +23595,7 @@ GameObject:
   - component: {fileID: 1264939138}
   m_Layer: 0
   m_Name: VGround (4)
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25466,7 +25425,7 @@ GameObject:
   - component: {fileID: 1380371840}
   m_Layer: 0
   m_Name: HGround (11)
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27435,7 +27394,7 @@ GameObject:
   - component: {fileID: 1515517521}
   m_Layer: 0
   m_Name: DRGround
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27509,7 +27468,7 @@ GameObject:
   - component: {fileID: 1523715785}
   m_Layer: 0
   m_Name: VGround (6)
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28250,7 +28209,7 @@ GameObject:
   - component: {fileID: 1564024596}
   m_Layer: 0
   m_Name: ULGround
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28694,7 +28653,7 @@ GameObject:
   - component: {fileID: 1590877227}
   m_Layer: 0
   m_Name: HGround (5)
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31066,7 +31025,7 @@ GameObject:
   - component: {fileID: 1744969887}
   m_Layer: 0
   m_Name: DLGround (1)
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31241,7 +31200,7 @@ GameObject:
   - component: {fileID: 1757420205}
   m_Layer: 0
   m_Name: VGround (7)
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31414,7 +31373,7 @@ GameObject:
   - component: {fileID: 1769404639}
   m_Layer: 0
   m_Name: HGround (15)
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32744,7 +32703,7 @@ GameObject:
   - component: {fileID: 1861288017}
   m_Layer: 0
   m_Name: VGround (5)
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33276,7 +33235,7 @@ GameObject:
   - component: {fileID: 1877085750}
   m_Layer: 0
   m_Name: HGround (13)
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33720,12 +33679,6 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224685109329059332, guid: 21993395333334f3a89085774430634d,
     type: 2}
   m_PrefabInternal: {fileID: 1152214500}
---- !u!114 &1890385684 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114607620134435046, guid: 21993395333334f3a89085774430634d,
-    type: 2}
-  m_PrefabInternal: {fileID: 1152214500}
-  m_Script: {fileID: 11500000, guid: 58c4080fe64bd4d17853eabdc1143386, type: 3}
 --- !u!1 &1898816599
 GameObject:
   m_ObjectHideFlags: 0
@@ -33737,7 +33690,7 @@ GameObject:
   - component: {fileID: 1898816600}
   m_Layer: 0
   m_Name: URGround (1)
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

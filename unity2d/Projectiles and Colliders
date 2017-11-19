@@ -1,0 +1,175 @@
+**Projectiles and Colliders**
+TWO THINGS
+	--> we can keep building towers on top of towers (bad)
+	--> we should be able to SEE which tower we selected
+
+Our build tiles have coliders on them right?
+	--> we're going to reference that colider and rename its tag when we build a tower
+				hit.collider.tag = "buildSiteFull";
+				//seriously that's easy
+
+Now let's have a tower follow our mouse around!
+
+we'll need to assign sprites to our buttons!
+	--> in the TowerBtn script make a serializefield
+	--> drag the sprites over to each tower button in the new field
+		--> apply to your prefabs as well!
+
+
+For tower manager add a sprite renderer component
+	--> make sure it's on a forward layer! This will be used to render a sprite on your mouse
+		--> order layer as well!
+	--> code for towerbtn and towermanager will show you how this is done. Very little is handled in the unity editor for this part
+
+
+Code will be at the bottom. But now we're ready for our projectiles. Woohoo!
+
+Make a new folder in sprites
+	--> "projectiles"
+
+Import the projectiles from your projectiles folder from the assets download
+	--> should just be three projectiles. Nice and easy.
+		--> resize these by using 1000 pixels or 600 pixels, your choice.
+	--> lowercase rock and fireball
+
+Make a new folder in prefabs called projectiles
+	--> drag sample objects of these projectiles we made from their sprites then delete them from the heiarchy
+
+
+Not bad! But we want to change the PIVOT POINT of the arrow right? Open the arrow in the sprite editor. THE BLUE DOT IS THE PIVOT POINT
+	--> move this to the far-right side so it'll rotate head-first like a real arrow would
+	--> for the fireball move it kind of to the front but not totally to the front so that it looks cool
+		--> BE SURE TO HIT "APPLY" !
+
+Pivot points will be what tries to hit the target when we "aim" our projectiles!
+
+Before we finish this lesson let's upgrade the prefabs with a component
+
+click on the arrow and go to physics2d 
+	--> add a 2d box colider
+		--> adjust the box so that it is better fit to the arrow
+			--> set the colider to "is trigger"
+				--> this means it won't "push" other objects
+
+click on the fireball
+	--> add a 2d circle colider
+		--> adjust as-necessary and set to "is trigger"
+
+CODE!!!
+
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.EventSystems;
+
+public class TowerManager : Singelton<TowerManager> {
+
+	//some unity-stuff!
+	private TowerBtn towerBtnPressed;
+	private SpriteRenderer spriteRenderer;	//create our sprite renderer object
+
+	void Start () {
+		
+		spriteRenderer = GetComponent<SpriteRenderer> ();	//looks for our spriterenderer component
+		//add this as a component to your tower manager object
+	}
+
+	//this is the only way we can keep track of the user's input real-time
+	void Update () {
+		// "0" is left "1" is right
+		if (Input.GetMouseButton (0)) {
+			//get world point from PERSPECTIVE of the camera!
+			Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			//notice Input.mousePosition!
+			RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
+			if (hit.collider.tag == "buildsite") {
+				//define this tag
+				hit.collider.tag = "buildSiteFull";
+				placeTower (hit);
+			}
+		}
+		if (spriteRenderer.enabled) {
+			followMouse ();
+		}
+	}
+
+	//set selected tower to be whichever tower button was pressed
+	public void selectedTower(TowerBtn towerSelected){
+
+		towerBtnPressed = towerSelected;
+		enableDragSprite (towerBtnPressed.DragSprite);
+	}
+
+	public void followMouse(){
+		transform.position = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+		//this is a hacky way to make sure everything is on top of the page
+		transform.position = new Vector2 (transform.position.x, transform.position.y);
+	}
+
+	//sprite renderer's sprite is the spirte we pass in
+	public void enableDragSprite(Sprite Sprite) {
+		spriteRenderer.enabled = true;
+		spriteRenderer.sprite = Sprite;
+	}
+
+	public void disableDragSprite(){
+		spriteRenderer.enabled = false;
+	}
+
+	public void placeTower(RaycastHit2D hit) {
+		// UI isn't a game object
+		if (!EventSystem.current.IsPointerOverGameObject () && towerBtnPressed != null) {
+			//create the tower
+			GameObject newTower = Instantiate (towerBtnPressed.TowerObject);
+			//set newTower transform position to equal the raycast's transform position
+			newTower.transform.position = hit.transform.position;
+		}
+	}
+
+}
+
+
+
+and the towerbtn.cs
+
+
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+//clicking the buttons will return tower objects
+public class TowerBtn : MonoBehaviour {
+
+	//we just need a gameobject to start
+	[SerializeField]
+	private GameObject towerObject;
+	[SerializeField]
+	private Sprite dragSprite;
+
+	//NOTICE THE CASES
+	public GameObject TowerObject{
+		get{
+			return towerObject;
+		}
+	}
+	//getter!
+	public Sprite DragSprite{
+		get{
+			return dragSprite;
+		}
+	}
+
+}
+
+
+So what does this do?
+So each towerBtn object get assigned a sprite thruogh the serializefield (we do the assigning on the editor).
+	--> at the time this button is pushed towerBtnPressed function will run which will pass the sprite via towerbtnpressed.dragSprite (a variable we set over in the towerbtn class script!)
+		--> so this sprite is passed into a function that sets the special unity renderer (we make an object of the sprite renderer AND assign it as a component AND "get<>" it in this script) "enabeld" to TRUE
+			--> it sets the ".sprite" attribute of that special object to the sprite we passed in! Get it?
+
+
+No code for the projectiles yet, but we've set them up as prefabs, sized them, and scaled their 2d box coliders (is trigger is true!)
+
