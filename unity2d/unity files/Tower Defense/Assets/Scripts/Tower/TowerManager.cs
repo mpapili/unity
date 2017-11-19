@@ -7,8 +7,12 @@ public class TowerManager : Singelton<TowerManager> {
 
 	//some unity-stuff!
 	private TowerBtn towerBtnPressed;
+	private SpriteRenderer spriteRenderer;	//create our sprite renderer object
 
 	void Start () {
+		
+		spriteRenderer = GetComponent<SpriteRenderer> ();	//looks for our spriterenderer component
+		//add this as a component to your tower manager object
 	}
 
 	//this is the only way we can keep track of the user's input real-time
@@ -20,8 +24,13 @@ public class TowerManager : Singelton<TowerManager> {
 			//notice Input.mousePosition!
 			RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
 			if (hit.collider.tag == "buildsite") {
+				//define this tag
+				hit.collider.tag = "buildSiteFull";
 				placeTower (hit);
 			}
+		}
+		if (spriteRenderer.enabled) {
+			followMouse ();
 		}
 	}
 
@@ -29,7 +38,23 @@ public class TowerManager : Singelton<TowerManager> {
 	public void selectedTower(TowerBtn towerSelected){
 
 		towerBtnPressed = towerSelected;
+		enableDragSprite (towerBtnPressed.DragSprite);
+	}
 
+	public void followMouse(){
+		transform.position = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+		//this is a hacky way to make sure everything is on top of the page
+		transform.position = new Vector2 (transform.position.x, transform.position.y);
+	}
+
+	//sprite renderer's sprite is the spirte we pass in
+	public void enableDragSprite(Sprite Sprite) {
+		spriteRenderer.enabled = true;
+		spriteRenderer.sprite = Sprite;
+	}
+
+	public void disableDragSprite(){
+		spriteRenderer.enabled = false;
 	}
 
 	public void placeTower(RaycastHit2D hit) {

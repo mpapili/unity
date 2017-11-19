@@ -9,6 +9,7 @@ TagManager:
   - buildsite
   - ground
   - tower
+  - buildSiteFull
   layers:
   - Default
   - TransparentFX
@@ -57,4 +58,7 @@ TagManager:
     locked: 0
   - name: Colision Layer
     uniqueID: 3023378911
+    locked: 0
+  - name: units
+    uniqueID: 771945873
     locked: 0

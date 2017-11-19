@@ -100,7 +100,7 @@ MonoBehaviour:
         m_MethodName: selectedTower
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgument: {fileID: 114936704147289708}
           m_ObjectArgumentAssemblyTypeName: TowerBtn, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -122,6 +122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerObject: {fileID: 1420638516641718, guid: f9ee18b238cf34269a3950fd947f2334,
     type: 2}
+  dragSprite: {fileID: 21300000, guid: a78a3f1f9859348e8b266f807ae7b6b8, type: 3}
 --- !u!222 &222815642801649996
 CanvasRenderer:
   m_ObjectHideFlags: 1
