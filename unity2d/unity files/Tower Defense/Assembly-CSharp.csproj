@@ -53,7 +53,9 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Enemy.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
+     <Compile Include="Assets\Scripts\Projectile.cs" />
      <Compile Include="Assets\Scripts\Singelton.cs" />
+     <Compile Include="Assets\Scripts\Tower\Tower.cs" />
      <Compile Include="Assets\Scripts\Tower\TowerBtn.cs" />
      <Compile Include="Assets\Scripts\Tower\TowerManager.cs" />
  <Reference Include="Facebook.Unity.Settings">

@@ -16,7 +16,8 @@ public class Enemy : MonoBehaviour {
 	void Start () {
 
 		enemy = GetComponent<Transform> ();	//we're using the built-in script "transform" on our enemy
-		
+		//register our enemy!
+		GameManager.Instance.RegisterEnemy(this);
 	}
 	
 
@@ -42,9 +43,8 @@ public class Enemy : MonoBehaviour {
 			target += 1;	//increase index for checkpoint array when we hit each new checkpoint
 		} else if (other.tag == "Finish") {
 			//if we hit the end, DESTROY me!
-			Destroy (gameObject);
 			//tell game manager to reduce our count of enemies on screen!
-			GameManager.Instance.removeEnemyFromScreen();
+			GameManager.Instance.UnregisterEnemy(this);
 		}
 	}
 
