@@ -14,19 +14,20 @@ public class GameManager : Singelton<GameManager> {
 	[SerializeField] private int totalEnemies; //how many are on the screen at the time
 	[SerializeField] private int enemiesPerSpawn; //how many at a time? More control
 
-	private int enemiesOnScreen = 0;
+	//list of enemies on screen
+	public List<Enemy> EnemyList = new List<Enemy> ();
+
 	const float spawnDelay = 0.5f;	//delay between spawns!
 
 
 	IEnumerator spawn(){
-		if (enemiesPerSpawn > 0 && enemiesOnScreen < totalEnemies) {
+		if (enemiesPerSpawn > 0 && EnemyList.Count < totalEnemies) {
 			for (int i = 0; i < enemiesPerSpawn; i++) {
-				if (enemiesOnScreen < maxEnemiesObScreen) {
+				if (EnemyList.Count < maxEnemiesObScreen) {
 					//create enemy and cast as GameObject
 					GameObject newEnemy = Instantiate (enemies [0]) as GameObject;
 					//move created enemy to spawnPoint right away
 					newEnemy.transform.position = spawnPoint.transform.position;
-					enemiesOnScreen += 1;	//increment private counter
 				}
 			}
 		}
@@ -34,14 +35,27 @@ public class GameManager : Singelton<GameManager> {
 		StartCoroutine (spawn ());
 	}
 
-
-	public void removeEnemyFromScreen(){
-
-		if (enemiesOnScreen > 0) {
-			enemiesOnScreen -= 1;
-		}
-
+	//register our enemy and add them to our list
+	public void RegisterEnemy(Enemy enemy){
+		EnemyList.Add (enemy);
 	}
+
+	public void UnregisterEnemy(Enemy enemy){
+		EnemyList.Remove (enemy);
+		//at this point we definitely want the gameobject gone
+		Destroy (enemy.gameObject);
+	}
+
+	//board-wipe!
+	public void DestroyAllEnemies(){
+		//for loops through lists!
+		foreach (Enemy enemy in EnemyList) {
+			Destroy (enemy.gameObject);
+		}
+		//reset entirely
+		EnemyList.Clear ();
+	}
+		
 
 	void Start () {
 		StartCoroutine (spawn ());

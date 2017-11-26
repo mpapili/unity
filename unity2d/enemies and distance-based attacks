@@ -1,0 +1,115 @@
+**Registering Enemies and distance-based attacks**
+We're going to start with setting up the towers to be shooting at our enemies. We're going to be seeing projectiles flying through the air!
+
+Our prefabs should be all set up and ready to go. Alright. Now there's one last thing we need to do. We need a script to attach to them with a few variables to keep track of:
+	--> attack strength
+	--> projectile type (for sounds later on)
+		--> instead of a tag
+
+Create a tag for projectile
+	--> assign it to your projectile prefabs
+		--> set the layer to the colision layer (doh!)
+			--> sorting layer will be on items. We can change this later.
+
+create a new C# script called "projectile"
+	--> we don't need start or update. it'll just be holding variables.
+code will be at the end of these notes
+
+select all the prefabs
+	--> add component --> scripts
+		--> projectile
+
+now let's assign the damage and projectile type for each!
+	--> we'll do 50, 50, 100
+		--> fireball being most powerful
+		--> arrow tower does same damage but goes faster!
+
+Now we need a script for our towers
+	--> they will control themselves.
+
+Create a new C# script in the tower folder
+	--> woohoo new empty script
+		--> we need to track time between attacks
+
+
+we'll need a public list in our game manager for enemies on screen to pass over to the tower objects
+	--> code includes how to for loop through a list without indices
+
+Every time an enemy gets created be sure to register them (add them to the gamemanager's list)
+
+	When we create our enemy in enemy.cs we'll:
+			//register our enemy!
+			GameManager.Instance.RegisterEnemy(this);
+
+We can refactor a lot now! (refactoring = we made a chance and can now go BACK and make things smarter like they should've been)
+
+code will be at the end, but after the refactor, rerun your code to make sure it still works (it does)
+
+you must be importing system.collections.generic to make these work
+
+WOW that was some good code practice actually. Best one from this guy yet.
+
+first the code for tower.cs:
+
+
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Tower : MonoBehaviour {
+
+	[SerializeField] float timeBetweenAttacks;
+	[SerializeField] private float attackRadius;
+	//we've created the projectile class already
+	private Projectile projectile;
+	//type "enemy" we'll be targeting
+	private Enemy targetEnemy = null;
+	private float attackCounter;
+
+	// Use this for initialization
+	void Start () {
+		
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
+
+	//get ALL enemies in range
+	private List<Enemy> GetEnemiesInRange() {
+		List<Enemy> enemiesInRange = new List<Enemy> () ;
+		//use the getter from GameManager to get the EnemyList
+		foreach(Enemy enemy in GameManager.Instance.EnemyList){
+			if((Vector2.Distance(transform.position, enemy.transform.position)) <= attackRadius){
+				enemiesInRange.Add(enemy);
+			}
+		}
+		return enemiesInRange;
+	}
+
+	//get NEAREST enemies from enemies in range list
+	private Enemy GetNearestEnemyInRange(){
+		Enemy nearestEnemy = null;
+		float smallestDistance = float.PositiveInfinity;	//anything compared to it is smaller
+		foreach (Enemy enemy in GetEnemiesInRange()) {
+			if (Vector2.Distance (transform.position, enemy.transform.position) < smallestDistance) {
+				nearestEnemy = enemy;
+				smallestDistance = Vector2.Distance (transform.position, enemy.transform.position);
+			}
+		}
+		return nearestEnemy;
+	}
+
+}
+
+
+
+
+notice how to use lists, using a getting to grab a list from the game manager
+notice how to tell distance using a float returned from Vector2.distance
+notice how he loops through to set nearestEnemy to the smallest enemy it's seen so far from the enemies in range
+
+very good stuff. A lot of code got refactored too from other scripts i did not include in this notes section
+
