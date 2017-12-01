@@ -21,7 +21,6 @@ public class Singelton<T> : MonoBehaviour where T: MonoBehaviour {
 			}
 
 			DontDestroyOnLoad (FindObjectOfType<T>());
-			print ("created gameManager instance");
 			return instance;
 		}
 	}
