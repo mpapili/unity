@@ -26,8 +26,8 @@ public class Tower : MonoBehaviour {
 		//frame-rate agnostic
 		attackCounter -= Time.deltaTime;
 
-		//if we don't have a target, GET ONE
-		if (targetEnemy == null) {
+		//if we don't have a target, GET ONE (and reset if it's dead)
+		if (targetEnemy == null || targetEnemy.IsDead) {
 			Enemy nearestEnemy = GetNearestEnemyInRange ();
 			//if an enemy is in ragne and it's radius is within attack radius
 			if (nearestEnemy != null && Vector2.Distance (transform.position, nearestEnemy.transform.position) <= attackRadius) {
