@@ -1,0 +1,52 @@
+**"Killing Enemies and Animations**
+
+so by this point we have things shooting at enemies but they don't delete themselves.
+
+We need to add a tag to the enemy collider, subtract health when an arrow hits, and destroy the enemy object when it dies
+
+So the first thing we do is have our enemies be the things that know what they hit
+	--> if it's tagged with projectile, we destroy "other"
+		--> in our collission function "other" is just the other gameobject that it collides with!
+
+so we get our code to subtract health and have a "die" fuinction
+	--> "closest enemy" stays locked on thoguh?! let's deactivate the colider on the enemy when they die immediatly.
+
+let's set some health points
+
+done.
+
+Let's make sure that everything works... have to change a few things. Make an isDead bool and an isDead getter. Towers have to be able to change targets, so we'll just add a bool in the "find new target" conditional which checks the getter for enemy's isDead
+
+Also let's disable the 2dcollider on the enemies when they die to be extra safe.
+
+
+ANIMATION TIME!
+
+A few things we need to set up.
+	--> assets, animations,
+		--> click on "dying"
+			--> uncheck "loop time" as we want it to be a one-off
+			--> do the same with Hurt animation
+
+
+remember the animation controller from forever ago?! GOOD NEWS. We only have to set this up in enemy1 and it'll work on all three enemy types!
+
+Double click on the enemy1 enemy control
+	--> drag dying above any state 
+		--> we need to think about some transitions
+			--> hurt animation comes out of nowhere but goes back to walking
+				--> right click hurt, make transition, arrow to walking
+			--> for dying right click "any state"
+				--> transition INTO dying and that's that
+			--> click on parameters in the heiarchy thing. Create a trigger in the animation controller called didDie
+
+Now we write the animation code (code for enemy.cs will be here)
+
+Now go back to the animation controller for enemy1
+	--> on the transition between "any state" and "dying" click on THE ARROW connecting them. Add a condition to the trigger we just made called "didDie".
+		--> in our code we can call this trigger. this is needed if you want to transition from the "any" state. We can call "hurt" animation just regularly
+
+
+DECENT LESSON we used getComponent a little more-freely
+	--> we also learned some animation stuff with the controllers and about transitions and the "any" state.
+		--> we also made our first "condition" for animation transitions :)

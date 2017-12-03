@@ -9,7 +9,7 @@ public enum proType {
 public class Projectile : MonoBehaviour {
 
 	//how strong is this variable?
-	[SerializeField] private int attackStrength;
+	[SerializeField] public int attackStrength;
 
 	[SerializeField] private proType projectileType;
 

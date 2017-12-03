@@ -8,13 +8,19 @@ public class Enemy : MonoBehaviour {
 	[SerializeField] private Transform exitPoint;	//transform is a location on the 2d map
 	[SerializeField] private Transform[] wayPoints; //array of transforms
 	[SerializeField] private float navigationUpdate;	//compared to delta-time for different speed computers
+	[SerializeField] private int healthPoints;	// enemy dies when this is zero
 
 	private Transform enemy;
 	private float navigationTime = 0;
+	private bool isDead = false;	// is enemy dead at this time?
+	private Collider2D enemyCollider; // get this component in start!
+	private Animator anim;	// our animator
 
 	// Use this for initialization
 	void Start () {
 
+		enemyCollider = GetComponent<Collider2D>();
+		anim = GetComponent<Animator> ();
 		enemy = GetComponent<Transform> ();	//we're using the built-in script "transform" on our enemy
 		//register our enemy!
 		GameManager.Instance.RegisterEnemy(this);
@@ -22,7 +28,7 @@ public class Enemy : MonoBehaviour {
 	
 
 	void Update () {
-		if (wayPoints != null) {
+		if (wayPoints != null && isDead != true) {
 			navigationTime += Time.deltaTime;	//time since navigation time created
 			if (navigationTime > navigationUpdate) {
 				if (target < wayPoints.Length) {
@@ -44,8 +50,39 @@ public class Enemy : MonoBehaviour {
 		} else if (other.tag == "Finish") {
 			//if we hit the end, DESTROY me!
 			//tell game manager to reduce our count of enemies on screen!
-			GameManager.Instance.UnregisterEnemy(this);
+			GameManager.Instance.UnregisterEnemy (this);
+		} else if (other.tag == "projectile") {	// else if it hits a projectile
+			// get good at "get"!
+			Projectile newP = other.gameObject.GetComponent<Projectile>();	//allows us to access the variables
+			enemyHit(newP.attackStrength);
+			Destroy(other.gameObject);	//should destroy whatever it's hit with!
 		}
 	}
 
+	public void enemyHit(int hitpoints){
+		// don't let it drop under zero!
+		if (healthPoints - hitpoints > 0) {
+			healthPoints -= hitpoints;	// take off health!
+			// call hurt animation
+			anim.Play("hurt");	// play hurt animation
+		} else {
+			// enemy should die
+			die();
+			// disabling components is easy! destroy the hitbox
+			enemyCollider.enabled = false;
+		}
+	}
+
+	// remember... MORE MODULAR
+	public void die(){
+		isDead = true;	// he dead
+		anim.SetTrigger("didDie");	// we can all this out of any animation so we use a trigger for it instead
+	}
+
+	// getter for isDead
+	public bool IsDead {
+		get{
+			return isDead;
+		}
+	}
 }
