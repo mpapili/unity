@@ -1,0 +1,68 @@
+**UI and finishing Touches**
+
+We need some UI elements
+	--> money
+	--> start game, end game
+	--> total escaped enemies for round
+	--> buttons! Start, stop, starting screen first time you play the game, etc
+
+Let's start by setting up our UI!
+	--> we need a black box that holds money values
+		--> and label for text
+	--> we also need prices to our towers
+
+So zoom out all the way to your massive UI canvas in the scene
+
+In your assets let's import the banner that we wanted for the top of the screen for the start button. Make sure you set the sprite mode on the sprite sheets to "multiple" so that we can take these sprites out!
+	--> done
+
+open the sprite editor on window1 and highlight it, click on the trim in the upper-left corner, name it in the sprite box "GameBanner" and hit apply.
+
+Now we want the thin arrow banner, do the same for that. This will hold our score/escpaed enemies. Call it StatsDisplay and hit apply.
+
+Close the editor and let's go into the window2 spritesheet and grab a moneysign board. Do the exact same thing.
+
+get a play button as well and the little shield in elements.
+
+open up the canvas and click on one of your buttons and add a UI image
+	--> drag the tower display from the GUI sprites into the sprite image for the new UI image we created
+		--> it's an expansion of the spritesheet you got it from!
+resize... rename... then control+D to duplicate over the other buttons... WHATTTT oh my god it snaps over the buttons we already had! This is amazing.
+
+time to add labels! Right click and add an UI element called "text" --> let's call it "15". Center it. bring the edges of the box inside the 15, make it gold, and play with the font until you're happy.
+
+hmm there's only one font that comes with unity! In our asset folder we have extra fonts! (they took a super mario font. it's free for personal use but you can't put it in a paid app without permissions!)
+
+Create a fonts folder in our assets (or just drag the whole folder under assets)
+	--> now it'll automatically show up in fonts lists yay
+		--> CTRL+D and get these texts listed UNDER the button objects in the heiarchy. Adjust prices to 5, 10, 15
+	--> p[lay the game. Aahh it looks so okay
+		--> needed some tweaking but we're good now
+
+create a new image under canvas and move it all the way to the top-left corner
+	--> in the source-image let's find our sprites and assign the scoreboard or whatever you called it. Adjust it now as you want. Make it longer and skinnier to whatever you want.
+	--> rename it
+		--> let's add some text to it! just like before. Write 10 in for our default amount, and change the font like before
+
+time for the next-wave button
+	--> create a button in the canvas and drag it up until it's above gameplay anywhere
+		--> adjust the text field that it already comes with
+	--> button almost set up! we just need it to have our play button. Drag the play button into your button image's "image sprite" component
+	--> holy cow that was easy
+
+play it and see how it looks. It looks pretty good!
+	--> pin it to the top-center if you want and it looks good! Now we need to add our escaped-image
+
+Create another image and move it towards the top
+	--> skinny and long
+		--> what wave we're on and how many enemies have escaped.
+	--> drag the stats display sprite from our windows spritesheet into its sprite component
+		--> create text, edit font like we've done before
+	--> name it "wave 1"
+	--> copy it
+		--> change it to "escaped enemies 0/10"
+	--> amazing. We can adjust these later.
+
+This is awesome! We're going to connect labels and get the code-side of this UI in the next video. No code this session.
+
+
