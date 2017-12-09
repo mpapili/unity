@@ -96,6 +96,7 @@ MonoBehaviour:
   towerObject: {fileID: 1322472211449770, guid: baa1e298f4ae1438eb00173bf5098b02,
     type: 2}
   dragSprite: {fileID: 21300000, guid: b7d599a84b0fb4498b9bcd538ec5e28b, type: 3}
+  towerPrice: 15
 --- !u!114 &114719283105724164
 MonoBehaviour:
   m_ObjectHideFlags: 1

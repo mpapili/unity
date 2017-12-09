@@ -16,6 +16,8 @@ public class Enemy : MonoBehaviour {
 	private Collider2D enemyCollider; // get this component in start!
 	private Animator anim;	// our animator
 
+	[SerializeField] private int rewardAmt;	// how much to reward player for killing this enemy
+
 	// Use this for initialization
 	void Start () {
 

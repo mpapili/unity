@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class TowerManager : Singelton<TowerManager> {
 
 	//some unity-stuff!
-	private TowerBtn towerBtnPressed;
+	public TowerBtn towerBtnPressed{get; set;}	// one-line getter and setter!
 	private SpriteRenderer spriteRenderer;	//create our sprite renderer object
 
 	void Start () {

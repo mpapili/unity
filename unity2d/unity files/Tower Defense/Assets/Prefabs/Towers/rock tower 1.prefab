@@ -123,6 +123,7 @@ MonoBehaviour:
   towerObject: {fileID: 1106323900059232, guid: 7cff58407ae094a63aae14d69b4d2b68,
     type: 2}
   dragSprite: {fileID: 21300000, guid: 14a5806ccc0074646890772edc6a5102, type: 3}
+  towerPrice: 5
 --- !u!222 &222888985948441038
 CanvasRenderer:
   m_ObjectHideFlags: 1

@@ -20066,7 +20066,7 @@ GameObject:
   - component: {fileID: 1061654557}
   - component: {fileID: 1061654556}
   m_Layer: 5
-  m_Name: Text
+  m_Name: moneyBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35525,14 +35525,29 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114402855120733908, guid: abac1235ac68e4ad1a0e2e7f902f81f0,
         type: 2}
-      propertyPath: maxEnemiesObScreen
-      value: 15
-      objectReference: {fileID: 0}
+      propertyPath: totalMoneyLbl
+      value: 
+      objectReference: {fileID: 1061654556}
     - target: {fileID: 114402855120733908, guid: abac1235ac68e4ad1a0e2e7f902f81f0,
         type: 2}
-      propertyPath: totalEnemies
-      value: 12
-      objectReference: {fileID: 0}
+      propertyPath: currentWaveLbl
+      value: 
+      objectReference: {fileID: 1742575064}
+    - target: {fileID: 114402855120733908, guid: abac1235ac68e4ad1a0e2e7f902f81f0,
+        type: 2}
+      propertyPath: playButtonLbl
+      value: 
+      objectReference: {fileID: 619319537}
+    - target: {fileID: 114402855120733908, guid: abac1235ac68e4ad1a0e2e7f902f81f0,
+        type: 2}
+      propertyPath: playBtn
+      value: 
+      objectReference: {fileID: 184569863}
+    - target: {fileID: 114402855120733908, guid: abac1235ac68e4ad1a0e2e7f902f81f0,
+        type: 2}
+      propertyPath: totalEscapedLbl
+      value: 
+      objectReference: {fileID: 99180009}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: abac1235ac68e4ad1a0e2e7f902f81f0, type: 2}
   m_IsPrefabParent: 0
