@@ -10,6 +10,7 @@ public class TowerBtn : MonoBehaviour {
 	private GameObject towerObject;
 	[SerializeField]
 	private Sprite dragSprite;
+	[SerializeField] private int towerPrice;	// how much towers cost
 
 	//NOTICE THE CASES
 	public GameObject TowerObject{
@@ -24,4 +25,9 @@ public class TowerBtn : MonoBehaviour {
 		}
 	}
 
+	public int TowerPrice{
+		get{
+			return towerPrice;
+		}
+	}
 }
